@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Main-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="Main" id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <button width="1" height="58.5" alignment="left" title="Customer" id="EaU-Ov-I7y">
+                            <connections>
+                                <segue destination="9s7-fz-hk2" kind="push" id="Bu4-Ou-L5s"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="6Be-sD-PyM"/>
+                        <button width="1" height="69.5" alignment="left" title="Settings" id="tzd-7H-Xbz">
+                            <connections>
+                                <segue destination="j7L-Y8-gW5" kind="push" id="IVm-v6-38V"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <menu key="menu" id="I2l-VB-N0D">
+                        <items>
+                            <menuItem title="Menu Item" id="Xkv-R3-s2z"/>
+                        </items>
+                    </menu>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="180" y="345"/>
+        </scene>
+        <!--Customer-->
+        <scene sceneID="35L-oP-Zx8">
+            <objects>
+                <controller title="Customer" id="9s7-fz-hk2" customClass="CustomerInterfaceController">
+                    <items>
+                        <button width="1" height="31.5" alignment="left" title="Nearby" id="bgX-Ip-3FP">
+                            <fontDescription key="font" type="system" pointSize="14"/>
+                            <connections>
+                                <segue destination="P8p-cA-ct4" kind="push" id="O30-5s-8b3"/>
+                            </connections>
+                        </button>
+                        <button width="1" height="34.5" alignment="left" title="By First Character" id="xFm-9b-OZn">
+                            <fontDescription key="font" type="system" pointSize="14"/>
+                        </button>
+                        <button width="1" height="35.5" alignment="left" title="By Province" id="hZj-6J-hHQ">
+                            <fontDescription key="font" type="system" pointSize="14"/>
+                        </button>
+                        <button width="1" height="35.5" alignment="left" title="By Order Size" id="Wn2-qd-I75">
+                            <fontDescription key="font" type="system" pointSize="14"/>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="385" y="238"/>
+        </scene>
+        <!--NearbyList-->
+        <scene sceneID="kh2-Bc-7Af">
+            <objects>
+                <controller title="NearbyList" id="P8p-cA-ct4" customClass="NearbyListController">
+                    <items>
+                        <button width="1" alignment="left" title="Show in Map" id="VJV-t8-WYx">
+                            <connections>
+                                <segue destination="weB-fJ-acB" kind="push" id="9Gg-IQ-H9E"/>
+                            </connections>
+                        </button>
+                        <table alignment="left" id="Rqa-gB-mC6">
+                            <items>
+                                <tableRow identifier="CustomerRow" id="7uF-pg-ZLC" customClass="CustomerRow">
+                                    <group key="rootItem" width="1" alignment="left" id="OxV-gU-QKB">
+                                        <items>
+                                            <label width="136" height="31.5" alignment="left" text="Label" id="GoD-By-a3X"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="Name" destination="GoD-By-a3X" id="F6Y-J3-kXJ"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="customerTable" destination="Rqa-gB-mC6" id="5u2-rV-6q6"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="624" y="131"/>
+        </scene>
+        <!--CustomerList-->
+        <scene sceneID="NfL-aW-BDb">
+            <objects>
+                <controller title="CustomerList" id="ja6-N0-B2j">
+                    <items>
+                        <table alignment="left" id="K25-0g-TK5">
+                            <items>
+                                <tableRow id="xbN-kX-Qd6">
+                                    <group key="rootItem" width="1" alignment="left" id="C7a-Qe-BeD"/>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="620" y="360"/>
+        </scene>
+        <!--Person-->
+        <scene sceneID="Ojn-v1-aTb">
+            <objects>
+                <controller title="Person" id="NcT-OW-37W">
+                    <items>
+                        <label width="136" height="63.5" alignment="left" text="Customer" id="WOB-ot-e4l"/>
+                        <button width="1" alignment="left" title="Recent Orders" id="ogK-bb-Sir">
+                            <connections>
+                                <segue destination="oeB-lk-qJC" kind="push" id="OSr-MD-ffj"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Go" id="uCJ-RM-6hG">
+                            <connections>
+                                <segue destination="y8k-PN-BJ2" kind="push" id="5ej-KO-8pZ"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="858" y="461"/>
+        </scene>
+        <!--Order-->
+        <scene sceneID="C4n-1l-cnJ">
+            <objects>
+                <controller title="Order" id="oeB-lk-qJC"/>
+            </objects>
+            <point key="canvasLocation" x="1047" y="459"/>
+        </scene>
+        <!--Navigate-->
+        <scene sceneID="mSG-tV-go3">
+            <objects>
+                <controller title="Navigate" id="y8k-PN-BJ2">
+                    <items>
+                        <map height="151" alignment="left" id="Wb4-je-Ksp"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1047" y="724"/>
+        </scene>
+        <!--NearbyMap-->
+        <scene sceneID="cEQ-85-yBs">
+            <objects>
+                <controller title="NearbyMap" id="weB-fJ-acB" customClass="NearbyMapController">
+                    <items>
+                        <map height="108" alignment="left" id="cHK-hB-4cj"/>
+                        <button width="1" alignment="left" title="Show in List" id="AFs-hd-pUf">
+                            <connections>
+                                <action selector="ShowinList" destination="weB-fJ-acB" id="RG8-uY-NN6"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="ShowListButton" destination="AFs-hd-pUf" id="vah-04-CXz"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="858" y="131"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="ir6-1h-xnn">
+            <objects>
+                <controller title="Settings" id="j7L-Y8-gW5">
+                    <items>
+                        <switch width="1" height="33.5" alignment="left" value="YES" title="Switch" id="fzv-Q6-oeg"/>
+                        <switch width="1" height="32.5" alignment="left" value="YES" title="Switch" id="NNl-3y-YK4"/>
+                        <switch width="1" height="33.5" alignment="left" value="YES" title="Switch" id="jJh-AV-XK4"/>
+                        <switch width="1" height="34.5" alignment="left" value="YES" title="Switch" id="Sb1-SS-WaX"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="382" y="461"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="169" y="753"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController"/>
+            </objects>
+            <point key="canvasLocation" x="378" y="753"/>
+        </scene>
+    </scenes>
+</document>
