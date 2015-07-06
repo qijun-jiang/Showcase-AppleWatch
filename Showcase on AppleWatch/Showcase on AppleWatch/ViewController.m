@@ -24,37 +24,53 @@
   
   NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
   __block NSString *tempstr;
-  
+  __block NSDictionary * replyInfo;
   
   PFQuery *query = [PFQuery queryWithClassName:@"star_loc"];
   //    [query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
   
-  //    __block int i = 0;
+  NSLog(@"Begin of the function.");
   
-  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-    if (!error) {
-      // The find succeeded.
-      NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-      
-      // Do something with the found objects
-      for (PFObject *object in objects) {
-        //          NSLog(@"%@", object.objectId);
+  @try {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+      if (!error) {
+        // The find succeeded.
+        NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
         
-        //          NSString *tempstr = object.objectId;
-        tempstr = object.objectId;
+        // Do something with the found objects
+        for (PFObject *object in objects) {
+          tempstr = object.objectId;
+          [tempDictionary setObject:object forKey:tempstr];
+        }
         
-        [tempDictionary setObject:object forKey:tempstr];
-        
-        //          i++;
-        
+      } else {
+        // Log details of the failure
+        NSLog(@"Error: %@ %@", error, [error userInfo]);
       }
       
-    } else {
-      // Log details of the failure
-      NSLog(@"Error: %@ %@", error, [error userInfo]);
-    }
-  }];
+      replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
+      
+      NSLog(@"End of block");
+    }];
+    
+    NSLog(@"End of try");
+  }
+  @catch (NSException * e) {
+    NSLog(@"Exception: %@", e);
+  }
+  @finally {
+    NSLog(@"Finally");
+    
+    
+    
+    
+  }
   
+  
+  NSString *tempstr2 = @"1111";
+  NSString *tempstr3 = @"11211";
+
+  NSLog(@"End of the function.");
 }
 
 - (void)didReceiveMemoryWarning {

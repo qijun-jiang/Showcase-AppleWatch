@@ -24,6 +24,8 @@
 		8F7525C31B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8F7525A61B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8F8BEE6F1B2BFBE700E4F71E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8BEE6E1B2BFBE700E4F71E /* MapViewController.m */; };
 		8F8BEE731B2C46B800E4F71E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8BEE721B2C46B800E4F71E /* MapKit.framework */; };
+		DDBD78911B4A9C9200CEA73D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BC1B4A5A8500729D3C /* Parse.framework */; };
+		DDBD78921B4A9CAC00CEA73D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BE1B4A5A8C00729D3C /* Bolts.framework */; };
 		EF1674801B3E4F2D00729D3C /* NearbyMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF16747F1B3E4F2D00729D3C /* NearbyMapController.m */; };
 		EF16748C1B4A4AC500729D3C /* CustomerRow.m in Sources */ = {isa = PBXBuildFile; fileRef = EF16748B1B4A4AC500729D3C /* CustomerRow.m */; };
 		EF16748F1B4A4CE000729D3C /* CustomerInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF16748E1B4A4CE000729D3C /* CustomerInterfaceController.m */; };
@@ -42,8 +44,6 @@
 		EF1674B71B4A596C00729D3C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674B61B4A596C00729D3C /* Social.framework */; };
 		EF1674BD1B4A5A8500729D3C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BC1B4A5A8500729D3C /* Parse.framework */; };
 		EF1674BF1B4A5A8C00729D3C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BE1B4A5A8C00729D3C /* Bolts.framework */; };
-		EF1674C11B4A5AB800729D3C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674C01B4A5AB800729D3C /* Parse.framework */; };
-		EF1674C31B4A5AC500729D3C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674C21B4A5AC500729D3C /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,8 +136,6 @@
 		EF1674B61B4A596C00729D3C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EF1674BC1B4A5A8500729D3C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		EF1674BE1B4A5A8C00729D3C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		EF1674C01B4A5AB800729D3C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../temp+yangyagn/parse-library-1.7.5/Parse.framework"; sourceTree = "<group>"; };
-		EF1674C21B4A5AC500729D3C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../temp+yangyagn/parse-library-1.7.5/Bolts.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +143,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF1674C31B4A5AC500729D3C /* Bolts.framework in Frameworks */,
-				EF1674C11B4A5AB800729D3C /* Parse.framework in Frameworks */,
+				DDBD78921B4A9CAC00CEA73D /* Bolts.framework in Frameworks */,
+				DDBD78911B4A9C9200CEA73D /* Parse.framework in Frameworks */,
 				EF1674B71B4A596C00729D3C /* Social.framework in Frameworks */,
 				EF1674B51B4A596500729D3C /* Accounts.framework in Frameworks */,
 				EF1674B31B4A595900729D3C /* libsqlite3.dylib in Frameworks */,
@@ -186,8 +184,6 @@
 		8F7525701B1D753300C9FD37 = {
 			isa = PBXGroup;
 			children = (
-				EF1674C21B4A5AC500729D3C /* Bolts.framework */,
-				EF1674C01B4A5AB800729D3C /* Parse.framework */,
 				EF1674BE1B4A5A8C00729D3C /* Bolts.framework */,
 				EF1674BC1B4A5A8500729D3C /* Parse.framework */,
 				EF1674B61B4A596C00729D3C /* Social.framework */,
@@ -645,6 +641,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/qijun/Desktop/temp+yangyagn/parse-library-1.7.5",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Showcase on AppleWatch/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -659,6 +656,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/qijun/Desktop/temp+yangyagn/parse-library-1.7.5",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Showcase on AppleWatch/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -59,78 +59,31 @@
 }
 
 - (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *replyInfo))reply {
-  
-  NSDictionary * replyInfo;
-  
-//  reply(replyInfo);
-  
-  
-   __block NSString *tempstr;
+
   
   if ([[userInfo objectForKey:@"action"]  isEqual: @"getCustomerList"]) {
     
-//    reply(replyInfo);
-    
-    NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
-    
+    // Kick off a heavy network request :)
     PFQuery *query = [PFQuery queryWithClassName:@"star_loc"];
-//    [query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
-    
-//    __block int i = 0;
-    
-//    reply(replyInfo);
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
-//      reply(replyInfo);
+      NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
+      NSDictionary * replyInfo;
       
       if (!error) {
-        tempstr = @"success!";
-        // The find succeeded.
-        //NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-        
-        // Do something with the found objects
-        
-//        reply(replyInfo);
-        
         for (PFObject *object in objects) {
-//          NSLog(@"%@", object.objectId);
-          
-//          NSString *tempstr = object.objectId;
-          tempstr = object.objectId;
-          
-//          reply(replyInfo);
-          
-          [tempDictionary setObject:object forKey:tempstr];
-          
-//          i++;
-          
-          
-//          reply(replyInfo);
+          NSString *tempstr1 = object.objectId;
+          [tempDictionary setObject:object[@"address"] forKey:tempstr1];
         }
-        
       } else {
         // Log details of the failure
         NSLog(@"Error: %@ %@", error, [error userInfo]);
       }
+      
+      replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
+      reply(replyInfo);
     }];
-    
-    
-//    replyInfo = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"Tom", @"2", @"John", @"3", @"Jim", nil];
-    
-//    replyInfo = [NSMutableDictionary dictionaryWithDictionary:tempDictionary];
-
-    //replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
-   // NSInteger *Addcount = 3;
-//    tempstr = @"success!";
-    replyInfo = [[NSDictionary alloc] initWithObjectsAndKeys:@"Aaa", tempstr, nil];
-    
-    
-    reply(replyInfo);
-
   }
-  
-  reply(replyInfo);
 }
 
 @end
