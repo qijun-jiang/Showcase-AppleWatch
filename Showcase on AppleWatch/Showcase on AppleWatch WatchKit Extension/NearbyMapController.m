@@ -32,8 +32,7 @@
       MKPointAnnotation * point;
       
       
-//      for (int i = 0; i < replyInfo.count; i++) {
-      for (int i = 0; i < 1; i++) {
+      for (int i = 0; i < replyInfo.count; i++) {
         NSDictionary * theCustomer = [[replyInfo allValues] objectAtIndex:i];
         [lat addObject:[theCustomer objectForKey:@"latitude"]];
         [lon addObject:[theCustomer objectForKey:@"longitude"]];
