@@ -111,6 +111,9 @@
           }
           theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
                          object[@"Name"], @"name",
+                         object[@"Address"], @"address",
+                         object[@"City"], @"city",
+                         object[@"state"], @"state",
                          object[@"Latitude"], @"latitude",
                          object[@"Longitud"], @"longitude",
                          distanceStr, @"distance", nil];
@@ -118,11 +121,18 @@
           [myItems addObject:theCustomer];
         }
         
+        /*
+         -------------- Sort By different categories -------------- 
+         */
+//        NSString *sortByStr = @"distance";
+//        NSString *sortByStr = @"name";
+        NSString *sortByStr = @"State";
+        
         // Sort this array with compare, Shiny Blocks!!!!
         NSArray *sortedArray;
         sortedArray = [myItems sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-          NSString *first = [(NSDictionary*)a valueForKeyPath:@"distance"];
-          NSString *second = [(NSDictionary*)b valueForKeyPath:@"distance"];
+          NSString *first = [(NSDictionary*)a valueForKeyPath:sortByStr];
+          NSString *second = [(NSDictionary*)b valueForKeyPath:sortByStr];
           return [first compare:second];
         }];
         
