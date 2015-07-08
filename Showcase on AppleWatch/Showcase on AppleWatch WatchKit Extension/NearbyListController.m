@@ -32,7 +32,7 @@
         _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
         [self.customerTable setNumberOfRows:replyInfo.count withRowType:@"CustomerRow"];
         for (int i = 0; i < self.customerTable.numberOfRows; i++) {
-          NSDictionary * theCustomer = [[replyInfo allValues] objectAtIndex:i];
+          NSDictionary * theCustomer = [replyInfo valueForKeyPath:[@(i) stringValue]];
           CustomerRow* theRow = [self.customerTable rowControllerAtIndex:i];
           [theRow.Name setText:[theCustomer objectForKey:@"name"]];
           [theRow.Distance setText:[theCustomer objectForKey:@"distance"]];

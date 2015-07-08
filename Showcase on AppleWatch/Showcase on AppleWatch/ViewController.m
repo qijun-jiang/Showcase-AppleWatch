@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import <Parse/Parse.h>
+@import CoreLocation;
+
 
 @interface ViewController ()
 
@@ -18,59 +20,83 @@
 //@synthesize myLabel;
 @synthesize myTextField;
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
   
-  NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
-  __block NSString *tempstr;
-  __block NSDictionary * replyInfo;
-  
-  PFQuery *query = [PFQuery queryWithClassName:@"star_loc"];
-  //    [query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
-  
-  NSLog(@"Begin of the function.");
-  
-  @try {
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-      if (!error) {
-        // The find succeeded.
-        NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-        
-        // Do something with the found objects
-        for (PFObject *object in objects) {
-          tempstr = object.objectId;
-          [tempDictionary setObject:object forKey:tempstr];
+  // Kick off a heavy network request :)
+  PFQuery *query = [PFQuery queryWithClassName:@"location"];
+  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    
+    NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
+    NSDictionary * replyInfo;
+    
+    
+    if (!error) {
+      
+//      CLLocationManager *lm = [[CLLocationManager alloc] init];
+//      lm.delegate = self;
+//      lm.desiredAccuracy = kCLLocationAccuracyBest;
+//      lm.distanceFilter = kCLHeadingFilterNone;
+//      [lm requestWhenInUseAuthorization];
+//      [lm startUpdatingLocation];
+//      CLLocation *currentLocation = [lm location];
+      
+      // temportary solution, Since we can't get the current location
+      CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
+      
+      CLLocation * Location;
+      double distanceMeters;
+      double distanceMiles;
+      NSDictionary *theCustomer;
+      NSMutableArray *myItems = [[NSMutableArray alloc] init];
+      
+      for (PFObject *object in objects) {
+        NSString *tempstr1 = object.objectId;
+        Location = [[CLLocation alloc] initWithLatitude:[object[@"Latitude"] floatValue] longitude:[object[@"Longitud"] floatValue]];
+        distanceMeters = [currentLocation distanceFromLocation:Location];
+        distanceMiles = distanceMeters / 1600;
+        NSString * distanceStr;
+        if (distanceMiles > 1000) {
+          distanceStr = @">1000";
         }
+        else {
+          distanceStr= [NSString stringWithFormat:@"%.2f", distanceMiles];
+        }
+        theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       object[@"Name"], @"name",
+                       object[@"Latitude"], @"latitude",
+                       object[@"Longitud"], @"longitude",
+                       distanceStr, @"distance", nil];
         
-      } else {
-        // Log details of the failure
-        NSLog(@"Error: %@ %@", error, [error userInfo]);
+        [myItems addObject:theCustomer];
+//        [tempDictionary setObject:theCustomer forKey:tempstr1];
       }
       
-      replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
+      // Sort this array with compare, Shiny Blocks!!!!
+      NSArray *sortedArray;
+      sortedArray = [myItems sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = [(NSDictionary*)a valueForKeyPath:@"distance"];
+        NSString *second = [(NSDictionary*)b valueForKeyPath:@"distance"];
+        
+        return [first compare:second];
+      }];
       
-      NSLog(@"End of block");
-    }];
+      // Insert Object into tempDictionary
+      for (int i = 0; i < [sortedArray count]; i++) {
+        id myArrayElement = [sortedArray objectAtIndex:i];
+        [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
+      }
+      
+    } else {
+      // Log details of the failure
+      NSLog(@"Error: %@ %@", error, [error userInfo]);
+    }
     
-    NSLog(@"End of try");
-  }
-  @catch (NSException * e) {
-    NSLog(@"Exception: %@", e);
-  }
-  @finally {
-    NSLog(@"Finally");
-    
-    
-    
-    
-  }
+    replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
+  }];
   
-  
-  NSString *tempstr2 = @"1111";
-  NSString *tempstr3 = @"11211";
-
-  NSLog(@"End of the function.");
 }
 
 - (void)didReceiveMemoryWarning {

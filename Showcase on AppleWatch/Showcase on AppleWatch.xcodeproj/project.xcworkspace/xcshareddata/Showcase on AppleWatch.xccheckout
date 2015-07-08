@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>F207F9B2-B51F-46CA-AFB6-7531ABF51737</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Showcase on AppleWatch</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>AB2273FEE30E30209DF00068A4293C27FA522955</key>
 		<string>https://github.com/qijun-jiang/Showcase-AppleWatch</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Showcase on AppleWatch/Showcase on AppleWatch.xcodeproj/project.xcworkspace</string>
+	<string>Showcase on AppleWatch/Showcase on AppleWatch.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>AB2273FEE30E30209DF00068A4293C27FA522955</key>
