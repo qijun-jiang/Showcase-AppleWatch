@@ -10,6 +10,7 @@
 
 @interface NearbyListController ()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *customerTable;
+@property NSDictionary *customerList;
 
 @end
 
@@ -17,23 +18,24 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-    
-    // Configure interface objects here.
 }
 
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
-    [WKInterfaceController openParentApplication:@{@"action": @"getCustomerList"} reply:^(NSDictionary *replyInfo,   NSError *error) {
+    [WKInterfaceController openParentApplication:@{@"getCustomers": @"NearbyList"} reply:^(NSDictionary *replyInfo,   NSError *error) {
       if (error) {
         NSLog(@"---------------ERROR:%@", error);
       }
       else {
         NSLog(@"------------RIGHT!");
+        _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
         [self.customerTable setNumberOfRows:replyInfo.count withRowType:@"CustomerRow"];
         for (int i = 0; i < self.customerTable.numberOfRows; i++) {
+          NSDictionary * theCustomer = [[replyInfo allValues] objectAtIndex:i];
           CustomerRow* theRow = [self.customerTable rowControllerAtIndex:i];
-          [theRow.Name setText:[[replyInfo allKeys] objectAtIndex:i]];
+          [theRow.Name setText:[theCustomer objectForKey:@"name"]];
+          [theRow.Distance setText:[theCustomer objectForKey:@"distance"]];
         }
       }
     }];
@@ -44,6 +46,11 @@
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
+}
+
+- (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
+  NSDictionary * theCustomer = [[_customerList allValues] objectAtIndex:rowIndex];
+  [self pushControllerWithName:@"PersonController" context:theCustomer];
 }
 
 @end

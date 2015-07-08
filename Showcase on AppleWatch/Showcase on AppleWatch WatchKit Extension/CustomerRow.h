@@ -1,4 +1,4 @@
-//
+ //
 //  CustomerRow.h
 //  Showcase on AppleWatch
 //
@@ -11,6 +11,7 @@
 
 @interface CustomerRow : NSObject
 
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel* Name;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *Name;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *Distance;
 
 @end

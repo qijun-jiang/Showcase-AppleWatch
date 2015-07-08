@@ -39,7 +39,7 @@
                         <button width="1" height="31.5" alignment="left" title="Nearby" id="bgX-Ip-3FP">
                             <fontDescription key="font" type="system" pointSize="14"/>
                             <connections>
-                                <segue destination="P8p-cA-ct4" kind="push" id="O30-5s-8b3"/>
+                                <segue destination="P8p-cA-ct4" kind="push" id="vMX-4R-OHA"/>
                             </connections>
                         </button>
                         <button width="1" height="34.5" alignment="left" title="By First Character" id="xFm-9b-OZn">
@@ -71,10 +71,19 @@
                                 <tableRow identifier="CustomerRow" id="7uF-pg-ZLC" customClass="CustomerRow">
                                     <group key="rootItem" width="1" alignment="left" id="OxV-gU-QKB">
                                         <items>
-                                            <label width="136" height="31.5" alignment="left" text="Label" id="GoD-By-a3X"/>
+                                            <label width="74" height="36.5" alignment="left" verticalAlignment="center" text="Label" id="GoD-By-a3X">
+                                                <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            </label>
+                                            <label width="40" height="37.5" alignment="right" text="Label" textAlignment="right" id="C6k-K9-XWX">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <label width="17" height="36.5" alignment="right" text="Mi" id="nDM-N5-Jz2">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
                                         </items>
                                     </group>
                                     <connections>
+                                        <outlet property="Distance" destination="C6k-K9-XWX" id="m2e-fl-eIv"/>
                                         <outlet property="Name" destination="GoD-By-a3X" id="F6Y-J3-kXJ"/>
                                     </connections>
                                 </tableRow>
@@ -108,23 +117,32 @@
         <!--Person-->
         <scene sceneID="Ojn-v1-aTb">
             <objects>
-                <controller title="Person" id="NcT-OW-37W">
+                <controller identifier="PersonController" title="Person" id="NcT-OW-37W" customClass="PersonInterfaceController">
                     <items>
-                        <label width="136" height="63.5" alignment="left" text="Customer" id="WOB-ot-e4l"/>
-                        <button width="1" alignment="left" title="Recent Orders" id="ogK-bb-Sir">
+                        <label width="136" alignment="left" text="Label" id="9aO-F5-yuf"/>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Recent Orders" id="ogK-bb-Sir">
                             <connections>
                                 <segue destination="oeB-lk-qJC" kind="push" id="OSr-MD-ffj"/>
                             </connections>
                         </button>
-                        <button width="1" alignment="left" title="Go" id="uCJ-RM-6hG">
+                        <label width="136" alignment="left" text="Label" minimumScaleFactor="0.80000000000000004" id="EeA-Mr-r71"/>
+                        <label width="136" alignment="left" text="Label" minimumScaleFactor="0.80000000000000004" id="3w7-Rc-PvX"/>
+                        <label width="136" alignment="left" text="Label" minimumScaleFactor="0.80000000000000004" id="IhM-DG-Ba9"/>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Go" id="uCJ-RM-6hG">
                             <connections>
                                 <segue destination="y8k-PN-BJ2" kind="push" id="5ej-KO-8pZ"/>
                             </connections>
                         </button>
                     </items>
+                    <connections>
+                        <outlet property="Distance" destination="IhM-DG-Ba9" id="F8e-fr-bhf"/>
+                        <outlet property="Latitude" destination="EeA-Mr-r71" id="u1E-1f-NN9"/>
+                        <outlet property="Longitude" destination="3w7-Rc-PvX" id="zVB-bZ-g9r"/>
+                        <outlet property="Name" destination="9aO-F5-yuf" id="GL2-Ma-GYz"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="858" y="461"/>
+            <point key="canvasLocation" x="812" y="462"/>
         </scene>
         <!--Order-->
         <scene sceneID="C4n-1l-cnJ">
@@ -149,15 +167,16 @@
             <objects>
                 <controller title="NearbyMap" id="weB-fJ-acB" customClass="NearbyMapController">
                     <items>
-                        <map height="108" alignment="left" id="cHK-hB-4cj"/>
+                        <map width="1" alignment="left" id="JMO-Nh-p48"/>
                         <button width="1" alignment="left" title="Show in List" id="AFs-hd-pUf">
                             <connections>
-                                <action selector="ShowinList" destination="weB-fJ-acB" id="RG8-uY-NN6"/>
+                                <action selector="ShowinList" destination="weB-fJ-acB" id="T4V-Az-oPP"/>
                             </connections>
                         </button>
                     </items>
                     <connections>
-                        <outlet property="ShowListButton" destination="AFs-hd-pUf" id="vah-04-CXz"/>
+                        <outlet property="CustomersMap" destination="JMO-Nh-p48" id="TpF-Lk-cxd"/>
+                        <outlet property="ShowListButton" destination="AFs-hd-pUf" id="R9I-oY-Wkw"/>
                     </connections>
                 </controller>
             </objects>

@@ -61,19 +61,86 @@
 - (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *replyInfo))reply {
 
   
-  if ([[userInfo objectForKey:@"action"]  isEqual: @"getCustomerList"]) {
+  /*
+   * For NearbyListController
+   */
+  
+  if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"NearbyList"]) {
     
     // Kick off a heavy network request :)
-    PFQuery *query = [PFQuery queryWithClassName:@"star_loc"];
+    PFQuery *query = [PFQuery queryWithClassName:@"location"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
       NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
       NSDictionary * replyInfo;
       
       if (!error) {
+        CLLocationManager *lm = [[CLLocationManager alloc] init];
+        lm.delegate = self;
+        lm.desiredAccuracy = kCLLocationAccuracyBest;
+        lm.distanceFilter = kCLHeadingFilterNone;
+        [lm requestWhenInUseAuthorization];
+        [lm startUpdatingLocation];
+        CLLocation * currentLocation = [lm location];
+        
+        CLLocation * Location;
+        double distanceMeters;
+        double distanceMiles;
+        NSDictionary *theCustomer;
+        
         for (PFObject *object in objects) {
           NSString *tempstr1 = object.objectId;
-          [tempDictionary setObject:object[@"address"] forKey:tempstr1];
+          Location = [[CLLocation alloc] initWithLatitude:[object[@"Latitude"] floatValue] longitude:[object[@"Longitud"] floatValue]];
+          distanceMeters = [currentLocation distanceFromLocation:Location];
+          distanceMiles = distanceMeters / 1600;
+          NSString * distanceStr;
+          if (distanceMiles > 1000) {
+            distanceStr = @">1000";
+          }
+          else {
+            distanceStr= [NSString stringWithFormat:@"%.2f", distanceMiles];
+          }
+          theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         object[@"Name"], @"name",
+                         object[@"Latitude"], @"latitude",
+                         object[@"Longitud"], @"longitude",
+                         distanceStr, @"distance", nil];
+          
+          [tempDictionary setObject:theCustomer forKey:tempstr1];
+        }
+      } else {
+        // Log details of the failure
+        NSLog(@"Error: %@ %@", error, [error userInfo]);
+      }
+      
+      replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
+      reply(replyInfo);
+    }];
+  }
+  
+  
+  /*
+   * For NearbyMapController
+   */
+  if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"NearbyMap"]) {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"location"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+      
+      NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
+      NSDictionary * replyInfo;
+      
+      if (!error) {
+        NSDictionary *theCustomer;
+        
+        for (PFObject *object in objects) {
+          NSString *tempstr1 = object.objectId;
+          theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         object[@"Name"], @"name",
+                         object[@"Latitude"], @"latitude",
+                         object[@"Longitud"], @"longitude",nil];
+          
+          [tempDictionary setObject:theCustomer forKey:tempstr1];
         }
       } else {
         // Log details of the failure

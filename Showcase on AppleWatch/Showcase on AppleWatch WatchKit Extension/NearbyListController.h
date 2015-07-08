@@ -9,6 +9,7 @@
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 #import "CustomerRow.h"
+#import "Customer.h"
 
 @interface NearbyListController : WKInterfaceController
 
