@@ -19,9 +19,15 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>JuJuJu</string>
+	<key>NSLocationWhenInUseUsageDescription
+NSLocationWhenInUseUsageDescription
+NSLocationWhenInUsageDescription</key>
+	<string>JuJu</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -43,11 +49,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription
-NSLocationWhenInUseUsageDescription
-NSLocationWhenInUsageDescription</key>
-	<string>JuJu</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>JuJuJu</string>
 </dict>
 </plist>
