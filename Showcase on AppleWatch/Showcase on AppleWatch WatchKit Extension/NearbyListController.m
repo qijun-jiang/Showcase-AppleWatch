@@ -23,7 +23,8 @@
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
-    [WKInterfaceController openParentApplication:@{@"getCustomers": @"NearbyList"} reply:^(NSDictionary *replyInfo,   NSError *error) {
+    [WKInterfaceController openParentApplication:@{@"getCustomers": @"NearbyList",
+                                                   @"sortType": @"NearbyAll"} reply:^(NSDictionary *replyInfo,   NSError *error) {
       if (error) {
         NSLog(@"---------------ERROR:%@", error);
       }

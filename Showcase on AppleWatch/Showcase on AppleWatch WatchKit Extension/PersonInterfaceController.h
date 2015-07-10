@@ -11,8 +11,8 @@
 
 @interface PersonInterfaceController : WKInterfaceController
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *Name;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *Latitude;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *Longitude;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *Address;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *Distance;
+@property (weak, nonatomic) IBOutlet WKInterfaceMap *MapView;
 
 @end

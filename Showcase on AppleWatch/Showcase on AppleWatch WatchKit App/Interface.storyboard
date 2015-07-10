@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ahk-yg-1CN">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
@@ -29,43 +29,207 @@
                     </menu>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="180" y="345"/>
+            <point key="canvasLocation" x="-205" y="483"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="hWo-d9-Hb2">
+            <objects>
+                <controller id="Ahk-yg-1CN">
+                    <items>
+                        <label width="136" height="23.5" alignment="left" text="Showcase Locator" id="9Pv-0Z-Y5i">
+                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                        <label width="136" height="24.5" alignment="left" text="Find the one" id="uma-mr-tqT">
+                            <color key="textColor" red="1" green="0.12549019610000001" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                        <label alignment="left" text="in ... customers" id="Ouq-Qh-pcJ">
+                            <color key="textColor" red="1" green="0.12549019610000001" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                        <button width="1" alignment="left" title="Nearby" id="pyA-VQ-iZa">
+                            <connections>
+                                <segue destination="hsk-HL-36P" kind="push" id="66m-nL-Jog"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="By Name" id="G42-BV-urx">
+                            <connections>
+                                <segue destination="Tb9-HV-pL2" kind="push" id="ab5-5R-jid"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="By State" id="dPN-AK-5Yr">
+                            <connections>
+                                <segue destination="ulA-Cz-4YG" kind="push" id="qZ0-rf-PFl"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Settings" id="diz-zv-JVr">
+                            <connections>
+                                <segue destination="j7L-Y8-gW5" kind="push" id="0qv-Iw-9Rf"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-151" y="-373.5"/>
+        </scene>
+        <!--Nearby-->
+        <scene sceneID="Z9S-fA-22i">
+            <objects>
+                <controller title="Nearby" id="hsk-HL-36P" customClass="NearbyInterfaceController">
+                    <items>
+                        <label alignment="left" text="Nearest customer" minimumScaleFactor="0.80000000000000004" id="UlF-tq-1qq"/>
+                        <label alignment="left" text="Name" minimumScaleFactor="0.90000000000000002" id="qrx-UC-SC1">
+                            <fontDescription key="font" type="system" pointSize="14"/>
+                        </label>
+                        <label alignment="left" text="Distance" minimumScaleFactor="0.90000000000000002" id="TOL-NF-ghi">
+                            <fontDescription key="font" type="system" pointSize="14"/>
+                        </label>
+                        <map height="87" alignment="left" id="XnO-CA-zfQ"/>
+                        <table alignment="left" id="lMO-dG-r8g">
+                            <items>
+                                <tableRow identifier="CustomerRow" id="Lq9-TR-h8R" customClass="CustomerRow">
+                                    <group key="rootItem" width="1" alignment="left" id="Rer-hw-d8b">
+                                        <items>
+                                            <label width="74" height="36.5" alignment="left" verticalAlignment="center" text="Label" id="ott-HZ-RAZ" userLabel="Name">
+                                                <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                            </label>
+                                            <label width="35" height="37.5" alignment="right" text="Label" textAlignment="right" id="Qkc-Z0-bTg" userLabel="Distance">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <label width="17" height="36.5" alignment="right" text="mi" id="wDz-Qp-Mc6">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="Distance" destination="Qkc-Z0-bTg" id="PHi-9R-0aG"/>
+                                        <outlet property="Name" destination="ott-HZ-RAZ" id="v2i-Yk-1L6"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <button width="1" alignment="left" title="See full list" id="1dT-Q8-y0o">
+                            <connections>
+                                <segue destination="P8p-cA-ct4" kind="push" id="Bay-cx-Qxs"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="distanceLabel" destination="TOL-NF-ghi" id="igO-2m-UiJ"/>
+                        <outlet property="nameLabel" destination="qrx-UC-SC1" id="DEc-KW-nu8"/>
+                        <outlet property="nearestFourTable" destination="lMO-dG-r8g" id="wej-XK-KzZ"/>
+                        <outlet property="theMap" destination="XnO-CA-zfQ" id="nYe-ea-B9O"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="128" y="-136.25"/>
+        </scene>
+        <!--Name-->
+        <scene sceneID="WgT-SS-zkz">
+            <objects>
+                <controller title="Name" id="Tb9-HV-pL2" customClass="NameInterfaceController">
+                    <items>
+                        <group width="1" alignment="left" id="Y0L-Gc-fJm">
+                            <items>
+                                <table alignment="left" id="Mab-ts-0F9">
+                                    <items>
+                                        <tableRow identifier="CharacterRow" id="Qii-J9-kqW" customClass="CustomerRow">
+                                            <group key="rootItem" width="1" height="27.5" alignment="left" radius="0.0" id="g8c-b1-tgZ">
+                                                <items>
+                                                    <label width="73.5" height="35.5" alignment="left" verticalAlignment="center" text="Label" id="Rds-o6-xOQ">
+                                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="font" type="italicSystem" pointSize="16"/>
+                                                    </label>
+                                                </items>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </group>
+                                            <connections>
+                                                <outlet property="Name" destination="Rds-o6-xOQ" id="eGr-nr-cVG"/>
+                                            </connections>
+                                        </tableRow>
+                                        <tableRow identifier="CustomerRow" id="Cpa-14-NTr" customClass="CustomerRow">
+                                            <group key="rootItem" width="1" alignment="left" id="Lig-Cf-VMk">
+                                                <items>
+                                                    <label width="74" height="36.5" alignment="left" verticalAlignment="center" text="Label" id="F67-Ex-6VZ" userLabel="Name">
+                                                        <fontDescription key="font" type="system" pointSize="14"/>
+                                                    </label>
+                                                    <label width="35" height="37.5" alignment="right" text="Label" textAlignment="right" id="Rxu-iR-XHc" userLabel="Distance">
+                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                    </label>
+                                                    <label width="17" height="36.5" alignment="right" text="mi" id="Sid-uE-zAY">
+                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <outlet property="Distance" destination="Rxu-iR-XHc" id="AFC-wa-bVu"/>
+                                                <outlet property="Name" destination="F67-Ex-6VZ" id="Q4p-sA-6gb"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="characterTable" destination="Mab-ts-0F9" id="qHy-YK-5tt"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="128" y="-384"/>
+        </scene>
+        <!--State-->
+        <scene sceneID="1H4-cE-QxX">
+            <objects>
+                <controller title="State" id="ulA-Cz-4YG">
+                    <items>
+                        <label width="131.5" height="27.5" alignment="left" text="State" id="UXj-qI-nei">
+                            <color key="textColor" red="0.27109375000000002" green="1" blue="0.5978009259" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                        <separator alignment="left" id="sGf-KD-shC">
+                            <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </separator>
+                        <label alignment="left" text="The customers " id="pbC-CE-tBK"/>
+                        <label alignment="left" text="comes from" id="vdM-dl-BVR"/>
+                        <label alignment="left" text="... states" id="tjC-dm-ZBM"/>
+                        <table alignment="left" id="5Ki-3G-BNB">
+                            <items>
+                                <tableRow id="2Ah-X2-qhW">
+                                    <group key="rootItem" width="1" alignment="left" id="rRa-on-tSz">
+                                        <items>
+                                            <label width="135.5" height="36.5" alignment="left" text="state name" id="Toc-lh-C1v"/>
+                                        </items>
+                                    </group>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="128" y="-605"/>
         </scene>
         <!--Customer-->
         <scene sceneID="35L-oP-Zx8">
             <objects>
                 <controller title="Customer" id="9s7-fz-hk2" customClass="CustomerInterfaceController">
                     <items>
-                        <button width="1" height="31.5" alignment="left" title="Nearby" id="bgX-Ip-3FP">
-                            <fontDescription key="font" type="system" pointSize="14"/>
-                            <connections>
-                                <segue destination="P8p-cA-ct4" kind="push" id="vMX-4R-OHA"/>
-                            </connections>
-                        </button>
-                        <button width="1" height="34.5" alignment="left" title="By First Character" id="xFm-9b-OZn">
+                        <button width="1" height="43.5" alignment="left" title="Nearby" id="bgX-Ip-3FP">
                             <fontDescription key="font" type="system" pointSize="14"/>
                         </button>
-                        <button width="1" height="35.5" alignment="left" title="By Province" id="hZj-6J-hHQ">
+                        <button width="1" height="45.5" alignment="left" title="By Name" id="xFm-9b-OZn">
                             <fontDescription key="font" type="system" pointSize="14"/>
                         </button>
-                        <button width="1" height="35.5" alignment="left" title="By Order Size" id="Wn2-qd-I75">
+                        <button width="1" height="46.5" alignment="left" title="By State" id="hZj-6J-hHQ">
                             <fontDescription key="font" type="system" pointSize="14"/>
                         </button>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="385" y="238"/>
+            <point key="canvasLocation" x="-10" y="390"/>
         </scene>
         <!--NearbyList-->
         <scene sceneID="kh2-Bc-7Af">
             <objects>
                 <controller title="NearbyList" id="P8p-cA-ct4" customClass="NearbyListController">
                     <items>
-                        <button width="1" alignment="left" title="Show in Map" id="VJV-t8-WYx">
-                            <connections>
-                                <segue destination="weB-fJ-acB" kind="push" id="9Gg-IQ-H9E"/>
-                            </connections>
-                        </button>
                         <table alignment="left" id="Rqa-gB-mC6">
                             <items>
                                 <tableRow identifier="CustomerRow" id="7uF-pg-ZLC" customClass="CustomerRow">
@@ -74,10 +238,10 @@
                                             <label width="74" height="36.5" alignment="left" verticalAlignment="center" text="Label" id="GoD-By-a3X">
                                                 <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                             </label>
-                                            <label width="40" height="37.5" alignment="right" text="Label" textAlignment="right" id="C6k-K9-XWX">
+                                            <label width="35" height="37.5" alignment="right" text="Label" textAlignment="right" id="C6k-K9-XWX">
                                                 <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                             </label>
-                                            <label width="17" height="36.5" alignment="right" text="Mi" id="nDM-N5-Jz2">
+                                            <label width="17" height="36.5" alignment="right" text="mi" id="nDM-N5-Jz2">
                                                 <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                             </label>
                                         </items>
@@ -95,7 +259,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="624" y="131"/>
+            <point key="canvasLocation" x="397" y="-136"/>
         </scene>
         <!--CustomerList-->
         <scene sceneID="NfL-aW-BDb">
@@ -112,7 +276,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="620" y="360"/>
+            <point key="canvasLocation" x="624" y="360"/>
         </scene>
         <!--Person-->
         <scene sceneID="Ojn-v1-aTb">
@@ -126,75 +290,41 @@
                             </connections>
                         </button>
                         <label width="136" alignment="left" text="Label" minimumScaleFactor="0.80000000000000004" id="EeA-Mr-r71"/>
-                        <label width="136" alignment="left" text="Label" minimumScaleFactor="0.80000000000000004" id="3w7-Rc-PvX"/>
                         <label width="136" alignment="left" text="Label" minimumScaleFactor="0.80000000000000004" id="IhM-DG-Ba9"/>
-                        <button width="1" alignment="left" verticalAlignment="bottom" title="Go" id="uCJ-RM-6hG">
-                            <connections>
-                                <segue destination="y8k-PN-BJ2" kind="push" id="5ej-KO-8pZ"/>
-                            </connections>
+                        <map height="100" alignment="left" id="fBC-Ba-tBn"/>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Navigate in iPhone" id="uCJ-RM-6hG">
+                            <fontDescription key="font" type="system" pointSize="13"/>
                         </button>
                     </items>
                     <connections>
+                        <outlet property="Address" destination="EeA-Mr-r71" id="WV1-WV-uFs"/>
                         <outlet property="Distance" destination="IhM-DG-Ba9" id="F8e-fr-bhf"/>
-                        <outlet property="Latitude" destination="EeA-Mr-r71" id="u1E-1f-NN9"/>
-                        <outlet property="Longitude" destination="3w7-Rc-PvX" id="zVB-bZ-g9r"/>
+                        <outlet property="MapView" destination="fBC-Ba-tBn" id="dcA-4q-l9U"/>
                         <outlet property="Name" destination="9aO-F5-yuf" id="GL2-Ma-GYz"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="812" y="462"/>
+            <point key="canvasLocation" x="632" y="-92.75"/>
         </scene>
         <!--Order-->
         <scene sceneID="C4n-1l-cnJ">
             <objects>
                 <controller title="Order" id="oeB-lk-qJC"/>
             </objects>
-            <point key="canvasLocation" x="1047" y="459"/>
-        </scene>
-        <!--Navigate-->
-        <scene sceneID="mSG-tV-go3">
-            <objects>
-                <controller title="Navigate" id="y8k-PN-BJ2">
-                    <items>
-                        <map height="151" alignment="left" id="Wb4-je-Ksp"/>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="1047" y="724"/>
-        </scene>
-        <!--NearbyMap-->
-        <scene sceneID="cEQ-85-yBs">
-            <objects>
-                <controller title="NearbyMap" id="weB-fJ-acB" customClass="NearbyMapController">
-                    <items>
-                        <map width="1" alignment="left" id="JMO-Nh-p48"/>
-                        <button width="1" alignment="left" title="Show in List" id="AFs-hd-pUf">
-                            <connections>
-                                <action selector="ShowinList" destination="weB-fJ-acB" id="T4V-Az-oPP"/>
-                            </connections>
-                        </button>
-                    </items>
-                    <connections>
-                        <outlet property="CustomersMap" destination="JMO-Nh-p48" id="TpF-Lk-cxd"/>
-                        <outlet property="ShowListButton" destination="AFs-hd-pUf" id="R9I-oY-Wkw"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="858" y="131"/>
+            <point key="canvasLocation" x="959" y="-92"/>
         </scene>
         <!--Settings-->
         <scene sceneID="ir6-1h-xnn">
             <objects>
                 <controller title="Settings" id="j7L-Y8-gW5">
                     <items>
-                        <switch width="1" height="33.5" alignment="left" value="YES" title="Switch" id="fzv-Q6-oeg"/>
-                        <switch width="1" height="32.5" alignment="left" value="YES" title="Switch" id="NNl-3y-YK4"/>
+                        <switch width="1" height="32.5" alignment="left" value="YES" title="mi/km" id="NNl-3y-YK4"/>
                         <switch width="1" height="33.5" alignment="left" value="YES" title="Switch" id="jJh-AV-XK4"/>
                         <switch width="1" height="34.5" alignment="left" value="YES" title="Switch" id="Sb1-SS-WaX"/>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="382" y="461"/>
+            <point key="canvasLocation" x="128" y="137"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -220,4 +350,7 @@
             <point key="canvasLocation" x="378" y="753"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="0qv-Iw-9Rf"/>
+    </inferredMetricsTieBreakers>
 </document>

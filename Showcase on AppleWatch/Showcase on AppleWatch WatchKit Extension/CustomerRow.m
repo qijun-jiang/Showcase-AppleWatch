@@ -10,5 +10,10 @@
 
 @implementation CustomerRow
 
+- (id) init {
+  self = [super init];
+  _isCustomer = true;
+  return self;
+}
 
 @end

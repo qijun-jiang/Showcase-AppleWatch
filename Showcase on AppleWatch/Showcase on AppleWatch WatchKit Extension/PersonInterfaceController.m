@@ -18,10 +18,22 @@
     NSDictionary *theCustomer = [[NSDictionary alloc] initWithDictionary:context];
     [super awakeWithContext:context];
     [_Name setText:[NSString stringWithFormat:@"Name: %@", [theCustomer objectForKey:@"name"]]];
-    [_Latitude setText:[NSString stringWithFormat:@"Latitude: %@", [theCustomer objectForKey: @"latitude"]]];
-    [_Longitude setText:[NSString stringWithFormat:@"Longitude: %@", [theCustomer objectForKey: @"longitude"]]];
+    [_Address setText:[NSString stringWithFormat:@"Address: %@", [theCustomer objectForKey: @"address"]]];
     [_Distance setText:[NSString stringWithFormat:@"Distance: %@ Mi", [theCustomer objectForKey: @"distance"]]];
     // Configure interface objects here.
+  
+  MKCoordinateSpan coordinateSpan = MKCoordinateSpanMake(0.05, 0.05);
+  NSMutableArray * locations = [[NSMutableArray alloc] init];
+  CLLocationCoordinate2D Location;
+  MKPointAnnotation * point;
+    
+  point= [[MKPointAnnotation alloc] init];
+  Location.latitude=[[theCustomer objectForKey:@"latitude"]floatValue];
+  Location.longitude=[[theCustomer objectForKey:@"longitude"] floatValue];
+  point.coordinate = Location;
+  [locations addObject:point];
+  [self.MapView addAnnotation:Location withPinColor: WKInterfaceMapPinColorRed];
+  [self.MapView setRegion:(MKCoordinateRegionMake(Location, coordinateSpan))];
 }
 
 - (void)willActivate {

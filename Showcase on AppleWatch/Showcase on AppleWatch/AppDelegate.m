@@ -79,17 +79,16 @@
       
       
       if (!error) {
-        
-        //      CLLocationManager *lm = [[CLLocationManager alloc] init];
-        //      lm.delegate = self;
-        //      lm.desiredAccuracy = kCLLocationAccuracyBest;
-        //      lm.distanceFilter = kCLHeadingFilterNone;
-        //      [lm requestWhenInUseAuthorization];
-        //      [lm startUpdatingLocation];
-        //      CLLocation *currentLocation = [lm location];
+              CLLocationManager *lm = [[CLLocationManager alloc] init];
+              lm.delegate = self;
+              lm.desiredAccuracy = kCLLocationAccuracyBest;
+              lm.distanceFilter = kCLHeadingFilterNone;
+              [lm requestWhenInUseAuthorization];
+              [lm startUpdatingLocation];
+              CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location
-        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
+       // CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
         
         CLLocation * Location;
         double distanceMeters;
@@ -98,7 +97,6 @@
         NSMutableArray *myItems = [[NSMutableArray alloc] init];
         
         for (PFObject *object in objects) {
-          NSString *tempstr1 = object.objectId;
           Location = [[CLLocation alloc] initWithLatitude:[object[@"Latitude"] floatValue] longitude:[object[@"Longitud"] floatValue]];
           distanceMeters = [currentLocation distanceFromLocation:Location];
           distanceMiles = distanceMeters / 1600;
@@ -124,9 +122,14 @@
         /*
          -------------- Sort By different categories -------------- 
          */
-//        NSString *sortByStr = @"distance";
-//        NSString *sortByStr = @"name";
-        NSString *sortByStr = @"State";
+        NSString * sortByStr;
+        if ([[userInfo objectForKey:@"sortType"] isEqual:@"Name"]) {
+          sortByStr = @"name";
+        } else if ([[userInfo objectForKey:@"sortType"] isEqual:@"State"]) {
+          sortByStr = @"State";
+        } else {
+          sortByStr = @"distance";
+        }
         
         // Sort this array with compare, Shiny Blocks!!!!
         NSArray *sortedArray;
@@ -137,7 +140,14 @@
         }];
         
         // Insert sorted Object into tempDictionary
-        for (int i = 0; i < [sortedArray count]; i++) {
+        int sortCount;
+        if ([[userInfo objectForKey:@"sortType"] isEqual:@"NearbyFour"]) {
+          sortCount = 4;
+        }
+        else {
+          sortCount = (int)[sortedArray count];
+        }
+        for (int i = 0; i < sortCount; i++) {
           id myArrayElement = [sortedArray objectAtIndex:i];
           [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
         }
