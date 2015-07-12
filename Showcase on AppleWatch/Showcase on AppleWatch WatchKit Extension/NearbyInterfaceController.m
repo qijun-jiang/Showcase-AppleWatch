@@ -9,8 +9,8 @@
 #import "NearbyInterfaceController.h"
 
 @interface NearbyInterfaceController ()
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *nameLabel;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *nearestDescription;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *fullListButton;
 @property NSDictionary *customerList;
 @end
 
@@ -20,16 +20,36 @@
     [super awakeWithContext:context];
     
     // Configure interface objects here.
-    [WKInterfaceController openParentApplication:@{@"getCustomers": @"NearbyList",
-                                                   @"sortType": @"NearbyFour"} reply:^(NSDictionary *replyInfo,   NSError *error) {
+    [WKInterfaceController openParentApplication:@{@"getCustomers": @"customerList",
+                                                   @"sortType": @"nearbyFour"} reply:^(NSDictionary *replyInfo,   NSError *error) {
     if (error) {
       NSLog(@"---------------ERROR:%@", error);
     }
     else {
       NSLog(@"------------RIGHT!");
+      
+      if (replyInfo.count == 0) {
+        [_nearestDescription setText:@"Sorry! We found no user for you."];
+        [_fullListButton setHidden:YES];
+        return;
+      }
+      else {
+        NSDictionary * theCustomer = [[replyInfo allValues] objectAtIndex:0];
+        if (replyInfo.count == 1) {
+          [_nearestDescription setText:[NSString stringWithFormat:@"The nearest customer is %@ away", [theCustomer objectForKey:@"distance"]]];
+        }
+        else {
+          NSDictionary *anotherCustomer = [[replyInfo allValues] objectAtIndex:(replyInfo.count - 1)];
+          [_nearestDescription setText:[NSString stringWithFormat:@"The nearest %ld customers are from %@ to %@ away", replyInfo.count, [theCustomer objectForKey:@"distance"], [anotherCustomer objectForKey:@"distance"]]];
+        }
+      }
+      
       _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
       [self.nearestFourTable setNumberOfRows:replyInfo.count withRowType:@"CustomerRow"];
       NSLog(@"num = %ld", (long)[_nearestFourTable numberOfRows]);
+      
+      NSDictionary * theCustomer;
+      CustomerRow * theRow;
       
       MKCoordinateSpan coordinateSpan = MKCoordinateSpanMake(0.05, 0.05);
       NSMutableArray * locations = [[NSMutableArray alloc] init];
@@ -40,16 +60,11 @@
       MKPointAnnotation * point;
       
       for (int i = 0; i < replyInfo.count; i++) {
-        NSDictionary * theCustomer = [[replyInfo allValues] objectAtIndex:i];
-        CustomerRow* theRow = [self.nearestFourTable rowControllerAtIndex:i];
-        
-        if (i == 0) {
-          [_nameLabel setText:[theCustomer objectForKey:@"name"]];
-          [_distanceLabel setText:[NSString stringWithFormat:@"%@ mi away", [theCustomer objectForKey:@"distance"]]];
-        }
+        theCustomer = [[replyInfo allValues] objectAtIndex:i];
+        theRow = [self.nearestFourTable rowControllerAtIndex:i];
         
         [theRow.Name setText:[theCustomer objectForKey:@"name"]];
-        [theRow.Distance setText:[theCustomer objectForKey:@"distance"]];
+        [theRow.Distance setText:[[theCustomer objectForKey:@"distance"] stringByAppendingString:@"》"]];
         NSLog(@"name = %@, distance = %@", [theCustomer objectForKey:@"name"], [theCustomer objectForKey:@"distance"]);
         [lat addObject:[theCustomer objectForKey:@"latitude"]];
         [lon addObject:[theCustomer objectForKey:@"longitude"]];

@@ -51,6 +51,9 @@ MKRoute *route;
   CLLocationCoordinate2D Location;
   MKPointAnnotation * point;
   
+  CLLocationCoordinate2D originLocation;
+  originLocation.latitude=[[lat objectAtIndex:0]floatValue];
+  originLocation.longitude=[[lon objectAtIndex:0]floatValue];
   
   for (int x = 0; x < [lat count]; x++) {
     point= [[MKPointAnnotation alloc] init];
@@ -73,47 +76,30 @@ MKRoute *route;
     double distanceMeters = [currentlocation distanceFromLocation:pointLocation];
     double distanceMiles = distanceMeters/1600;
     NSLog(@"%f Miles", distanceMiles);
+    
+   // MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
+    MKPlacemark *placemark = [[MKPlacemark alloc]
+                              initWithCoordinate:Location
+                              addressDictionary:nil];
+    MKPlacemark *originmark = [[MKPlacemark alloc] initWithCoordinate:originLocation addressDictionary:nil];
+    
+    //MKMapItem* origin = [MKMapItem mapItemForCurrentLocation];
+    MKMapItem* origin = [[MKMapItem alloc] initWithPlacemark:originmark];
+    MKMapItem* destination = [[MKMapItem alloc] initWithPlacemark:placemark];
+    
+    MKDirectionsRequest* request = [MKDirectionsRequest new];
+    [request setSource:origin];
+    [request setDestination:destination];
+    [request setTransportType:MKDirectionsTransportTypeAutomobile];
+    
+    MKDirections* directions = [[MKDirections alloc] initWithRequest:request];
+    
+    [directions calculateETAWithCompletionHandler:^(MKETAResponse *response, NSError *error) {
+      NSLog(@"time = %f", response.expectedTravelTime);
+      //completion(response.expectedTravelTime, error);
+    }];
   }
   [self.mymapview addAnnotations:locations];
-  
-  //YAYAYAYAY
-  
-  CLLocationCoordinate2D Location1;
-  Location.latitude=[[lat objectAtIndex:0]floatValue];
-  Location.longitude=[[lon objectAtIndex:0]floatValue];
-  Location1.latitude=[[lat objectAtIndex:1]floatValue];
-  Location1.longitude=[[lon objectAtIndex:1]floatValue];
-  
-  
-  MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
-  MKPlacemark *placemark = [[MKPlacemark alloc]
-                            initWithCoordinate:Location1
-                            addressDictionary:nil];;
-  
-  MKPlacemark *placemark1 = [[MKPlacemark alloc]
-                             initWithCoordinate:Location
-                             addressDictionary:nil];;
-  
-  //[directionsRequest setSource:[MKMapItem mapItemForCurrentLocation]];
-  [directionsRequest setSource:[[MKMapItem alloc] initWithPlacemark:placemark1]];
-  [directionsRequest setDestination:[[MKMapItem alloc] initWithPlacemark:placemark]];
-  directionsRequest.transportType = MKDirectionsTransportTypeAutomobile;
-  MKDirections *directions = [[MKDirections alloc] initWithRequest:directionsRequest];
-  [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
-    if (error) {
-      NSLog(@"Error %@", error.description);
-    } else {
-      route = response.routes.lastObject;
-      [self.mymapview addOverlay:route.polyline];
-    }
-  }];
-}
-
--(MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-  MKPolylineRenderer  * routeLineRenderer = [[MKPolylineRenderer alloc] initWithPolyline:route.polyline];
-  routeLineRenderer.strokeColor = [UIColor redColor];
-  routeLineRenderer.lineWidth = 5;
-  return routeLineRenderer;
 }
 
 //
@@ -129,6 +115,7 @@ MKRoute *route;
   
   [directionsRequest setSource:[MKMapItem mapItemForCurrentLocation]];
   [directionsRequest setDestination:[[MKMapItem alloc] initWithPlacemark:placemark]];
+  //transporttype can be changed here!!!!
   directionsRequest.transportType = MKDirectionsTransportTypeAutomobile;
   MKDirections *directions = [[MKDirections alloc] initWithRequest:directionsRequest];
   [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
@@ -136,8 +123,11 @@ MKRoute *route;
       NSLog(@"Error %@", error.description);
     } else {
       route = response.routes.lastObject;
-      [self.mymapview addOverlay:route.polyline];
+      //now dont plot
+      //[self.mymapview addOverlay:route.polyline];
     }
+    double time= route.expectedTravelTime/(60*24);
+    NSLog(@"%f hr", time);
   }];
 }
 

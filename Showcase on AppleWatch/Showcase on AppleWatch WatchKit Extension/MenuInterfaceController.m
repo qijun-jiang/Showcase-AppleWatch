@@ -6,18 +6,26 @@
 //  Copyright (c) 2015 Cheng Hua. All rights reserved.
 //
 
-#import "CustomerInterfaceController.h"
+#import "MenuInterfaceController.h"
 
-@interface CustomerInterfaceController ()
-
+@interface MenuInterfaceController ()
 @end
 
-@implementation CustomerInterfaceController
+@implementation MenuInterfaceController
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-    
     // Configure interface objects here.
+  
+  MySettings *sharedSetting = [MySettings sharedSetting];
+  [sharedSetting getUnitIsMile];
+}
+
+- (IBAction)nameButton {
+  [self pushControllerWithName:@"ListController" context:@"byName"];
+}
+- (IBAction)provinceButton {
+  [self pushControllerWithName:@"ListController" context:@"byState"];
 }
 
 - (void)willActivate {
@@ -29,6 +37,7 @@
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
 }
+
 
 @end
 

@@ -26,7 +26,6 @@
 		DDBD78911B4A9C9200CEA73D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BC1B4A5A8500729D3C /* Parse.framework */; };
 		DDBD78921B4A9CAC00CEA73D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BE1B4A5A8C00729D3C /* Bolts.framework */; };
 		EF16748C1B4A4AC500729D3C /* CustomerRow.m in Sources */ = {isa = PBXBuildFile; fileRef = EF16748B1B4A4AC500729D3C /* CustomerRow.m */; };
-		EF16748F1B4A4CE000729D3C /* CustomerInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF16748E1B4A4CE000729D3C /* CustomerInterfaceController.m */; };
 		EF1674921B4A4D2500729D3C /* NearbyListController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1674911B4A4D2500729D3C /* NearbyListController.m */; };
 		EF1674A11B4A590000729D3C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674A01B4A590000729D3C /* AudioToolbox.framework */; };
 		EF1674A31B4A590900729D3C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674A21B4A590900729D3C /* CFNetwork.framework */; };
@@ -42,12 +41,18 @@
 		EF1674B71B4A596C00729D3C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674B61B4A596C00729D3C /* Social.framework */; };
 		EF1674BD1B4A5A8500729D3C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BC1B4A5A8500729D3C /* Parse.framework */; };
 		EF1674BF1B4A5A8C00729D3C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BE1B4A5A8C00729D3C /* Bolts.framework */; };
-		EF4072A11B4AE14F00E14F48 /* NearbyMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4072A01B4AE14F00E14F48 /* NearbyMapController.m */; };
+		EF9555121B50F9580014880F /* Settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9555111B50F9580014880F /* Settings-icon.png */; };
+		EF9555141B50FADD0014880F /* Name-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9555131B50FADD0014880F /* Name-icon.png */; };
+		EF9555161B50FAF70014880F /* Nearby-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9555151B50FAF70014880F /* Nearby-icon.png */; };
+		EF9555201B50FF7D0014880F /* icon-city.png in Resources */ = {isa = PBXBuildFile; fileRef = EF95551F1B50FF7D0014880F /* icon-city.png */; };
 		EF9A45DA1B4EBED5005C12A3 /* NearbyInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A45D91B4EBED5005C12A3 /* NearbyInterfaceController.m */; };
+		EFBA9A5B1B5189D500DC8476 /* MySettings.m in Sources */ = {isa = PBXBuildFile; fileRef = EFBA9A5A1B5189D500DC8476 /* MySettings.m */; };
+		EFDF1A8B1B511D1700944CB8 /* SettingsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDF1A8A1B511D1700944CB8 /* SettingsInterfaceController.m */; };
+		EFDF1A8D1B51316900944CB8 /* MenuInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDF1A8C1B51316900944CB8 /* MenuInterfaceController.m */; };
 		EFF18CAC1B4BFEB7007D6743 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF18CAB1B4BFEB7007D6743 /* Customer.m */; };
 		EFFA93111B4CF0C700EBAE06 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFFA93101B4CF0C700EBAE06 /* Interface.storyboard */; };
 		EFFA93171B4CFA8600EBAE06 /* PersonInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFA93161B4CFA8600EBAE06 /* PersonInterfaceController.m */; };
-		EFFDEDBF1B4ECFF800523474 /* NameInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFDEDBE1B4ECFF800523474 /* NameInterfaceController.m */; };
+		EFFDEDBF1B4ECFF800523474 /* ListInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFDEDBE1B4ECFF800523474 /* ListInterfaceController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,8 +124,7 @@
 		8F8BEE721B2C46B800E4F71E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EF16748A1B4A4AC500729D3C /* CustomerRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerRow.h; sourceTree = "<group>"; };
 		EF16748B1B4A4AC500729D3C /* CustomerRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerRow.m; sourceTree = "<group>"; };
-		EF16748D1B4A4CE000729D3C /* CustomerInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerInterfaceController.h; sourceTree = "<group>"; };
-		EF16748E1B4A4CE000729D3C /* CustomerInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerInterfaceController.m; sourceTree = "<group>"; };
+		EF16748D1B4A4CE000729D3C /* MenuInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuInterfaceController.h; sourceTree = "<group>"; };
 		EF1674901B4A4D2500729D3C /* NearbyListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyListController.h; sourceTree = "<group>"; };
 		EF1674911B4A4D2500729D3C /* NearbyListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyListController.m; sourceTree = "<group>"; };
 		EF1674A01B4A590000729D3C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -137,17 +141,24 @@
 		EF1674B61B4A596C00729D3C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EF1674BC1B4A5A8500729D3C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		EF1674BE1B4A5A8C00729D3C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		EF40729F1B4AE14F00E14F48 /* NearbyMapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyMapController.h; sourceTree = "<group>"; };
-		EF4072A01B4AE14F00E14F48 /* NearbyMapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyMapController.m; sourceTree = "<group>"; };
+		EF9555111B50F9580014880F /* Settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings-icon.png"; sourceTree = "<group>"; };
+		EF9555131B50FADD0014880F /* Name-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Name-icon.png"; sourceTree = "<group>"; };
+		EF9555151B50FAF70014880F /* Nearby-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nearby-icon.png"; sourceTree = "<group>"; };
+		EF95551F1B50FF7D0014880F /* icon-city.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-city.png"; sourceTree = "<group>"; };
 		EF9A45D81B4EBED5005C12A3 /* NearbyInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NearbyInterfaceController.h; path = "Showcase on AppleWatch WatchKit Extension/NearbyInterfaceController.h"; sourceTree = SOURCE_ROOT; };
 		EF9A45D91B4EBED5005C12A3 /* NearbyInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NearbyInterfaceController.m; path = "Showcase on AppleWatch WatchKit Extension/NearbyInterfaceController.m"; sourceTree = SOURCE_ROOT; };
+		EFBA9A591B5189D500DC8476 /* MySettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySettings.h; path = "Showcase on AppleWatch WatchKit Extension/MySettings.h"; sourceTree = SOURCE_ROOT; };
+		EFBA9A5A1B5189D500DC8476 /* MySettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MySettings.m; path = "Showcase on AppleWatch WatchKit Extension/MySettings.m"; sourceTree = SOURCE_ROOT; };
+		EFDF1A891B511D1700944CB8 /* SettingsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsInterfaceController.h; sourceTree = "<group>"; };
+		EFDF1A8A1B511D1700944CB8 /* SettingsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsInterfaceController.m; sourceTree = "<group>"; };
+		EFDF1A8C1B51316900944CB8 /* MenuInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuInterfaceController.m; sourceTree = "<group>"; };
 		EFF18CAA1B4BFEB7007D6743 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
 		EFF18CAB1B4BFEB7007D6743 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		EFFA93101B4CF0C700EBAE06 /* Interface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		EFFA93151B4CFA8600EBAE06 /* PersonInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInterfaceController.h; sourceTree = "<group>"; };
 		EFFA93161B4CFA8600EBAE06 /* PersonInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInterfaceController.m; sourceTree = "<group>"; };
-		EFFDEDBD1B4ECFF800523474 /* NameInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NameInterfaceController.h; path = "Showcase on AppleWatch WatchKit Extension/NameInterfaceController.h"; sourceTree = SOURCE_ROOT; };
-		EFFDEDBE1B4ECFF800523474 /* NameInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NameInterfaceController.m; path = "Showcase on AppleWatch WatchKit Extension/NameInterfaceController.m"; sourceTree = SOURCE_ROOT; };
+		EFFDEDBD1B4ECFF800523474 /* ListInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListInterfaceController.h; path = "Showcase on AppleWatch WatchKit Extension/ListInterfaceController.h"; sourceTree = SOURCE_ROOT; };
+		EFFDEDBE1B4ECFF800523474 /* ListInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListInterfaceController.m; path = "Showcase on AppleWatch WatchKit Extension/ListInterfaceController.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,12 +298,14 @@
 				8F7525A81B1D755600C9FD37 /* Supporting Files */,
 				EF1674901B4A4D2500729D3C /* NearbyListController.h */,
 				EF1674911B4A4D2500729D3C /* NearbyListController.m */,
-				EF40729F1B4AE14F00E14F48 /* NearbyMapController.h */,
-				EF4072A01B4AE14F00E14F48 /* NearbyMapController.m */,
 				EF16748A1B4A4AC500729D3C /* CustomerRow.h */,
 				EF16748B1B4A4AC500729D3C /* CustomerRow.m */,
-				EF16748D1B4A4CE000729D3C /* CustomerInterfaceController.h */,
-				EF16748E1B4A4CE000729D3C /* CustomerInterfaceController.m */,
+				EFBA9A591B5189D500DC8476 /* MySettings.h */,
+				EFBA9A5A1B5189D500DC8476 /* MySettings.m */,
+				EFDF1A891B511D1700944CB8 /* SettingsInterfaceController.h */,
+				EFDF1A8A1B511D1700944CB8 /* SettingsInterfaceController.m */,
+				EF16748D1B4A4CE000729D3C /* MenuInterfaceController.h */,
+				EFDF1A8C1B51316900944CB8 /* MenuInterfaceController.m */,
 				EFFA93151B4CFA8600EBAE06 /* PersonInterfaceController.h */,
 				EFFA93161B4CFA8600EBAE06 /* PersonInterfaceController.m */,
 			);
@@ -312,10 +325,14 @@
 			isa = PBXGroup;
 			children = (
 				EFFA93101B4CF0C700EBAE06 /* Interface.storyboard */,
-				EF9A45D81B4EBED5005C12A3 /* NearbyInterfaceController.h */,
 				EF9A45D91B4EBED5005C12A3 /* NearbyInterfaceController.m */,
-				EFFDEDBD1B4ECFF800523474 /* NameInterfaceController.h */,
-				EFFDEDBE1B4ECFF800523474 /* NameInterfaceController.m */,
+				EF95551F1B50FF7D0014880F /* icon-city.png */,
+				EF9555151B50FAF70014880F /* Nearby-icon.png */,
+				EF9555131B50FADD0014880F /* Name-icon.png */,
+				EF9555111B50F9580014880F /* Settings-icon.png */,
+				EF9A45D81B4EBED5005C12A3 /* NearbyInterfaceController.h */,
+				EFFDEDBD1B4ECFF800523474 /* ListInterfaceController.h */,
+				EFFDEDBE1B4ECFF800523474 /* ListInterfaceController.m */,
 				8F7525BF1B1D755600C9FD37 /* Images.xcassets */,
 				8F7525BA1B1D755600C9FD37 /* Supporting Files */,
 			);
@@ -484,8 +501,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9555121B50F9580014880F /* Settings-icon.png in Resources */,
 				EFFA93111B4CF0C700EBAE06 /* Interface.storyboard in Resources */,
 				8F7525C01B1D755600C9FD37 /* Images.xcassets in Resources */,
+				EF9555161B50FAF70014880F /* Nearby-icon.png in Resources */,
+				EF9555141B50FADD0014880F /* Name-icon.png in Resources */,
+				EF9555201B50FF7D0014880F /* icon-city.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,15 +537,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFDF1A8B1B511D1700944CB8 /* SettingsInterfaceController.m in Sources */,
+				EFBA9A5B1B5189D500DC8476 /* MySettings.m in Sources */,
 				8F7525B01B1D755600C9FD37 /* NotificationController.m in Sources */,
 				EF1674921B4A4D2500729D3C /* NearbyListController.m in Sources */,
 				EF16748C1B4A4AC500729D3C /* CustomerRow.m in Sources */,
-				EFFDEDBF1B4ECFF800523474 /* NameInterfaceController.m in Sources */,
+				EFFDEDBF1B4ECFF800523474 /* ListInterfaceController.m in Sources */,
 				EFFA93171B4CFA8600EBAE06 /* PersonInterfaceController.m in Sources */,
+				EFDF1A8D1B51316900944CB8 /* MenuInterfaceController.m in Sources */,
 				EF9A45DA1B4EBED5005C12A3 /* NearbyInterfaceController.m in Sources */,
-				EF4072A11B4AE14F00E14F48 /* NearbyMapController.m in Sources */,
 				8F7525AD1B1D755600C9FD37 /* InterfaceController.m in Sources */,
-				EF16748F1B4A4CE000729D3C /* CustomerInterfaceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

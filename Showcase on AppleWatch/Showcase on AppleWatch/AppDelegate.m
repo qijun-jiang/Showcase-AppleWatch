@@ -11,9 +11,10 @@
 
 @import CoreLocation;
 
-
 @interface AppDelegate ()
-
+@property MKMapView *mapView;
+@property NSInteger unitIsMile;
+@property NSInteger showInTime;
 @end
 
 @implementation AppDelegate
@@ -63,12 +64,18 @@
 
 - (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *replyInfo))reply {
 
+  if ([userInfo objectForKey:@"setUnitIsMile"] != nil) {
+    _unitIsMile = [[userInfo objectForKey:@"setUnitIsMile"] intValue];
+    NSDictionary *replyInfo = nil;
+    //NSDictionary *replyInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+    //                                         [NSString stringWithFormat:@"aaaaa=%ld",_unitIsMile], @"unit", nil];
+    reply(replyInfo);
+  }
   
   /*
    * For NearbyListController
    */
-  
-  if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"NearbyList"]) {
+  if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"customerList"]) {
     
     // Kick off a heavy network request :)
     PFQuery *query = [PFQuery queryWithClassName:@"location"];
@@ -92,21 +99,27 @@
         
         CLLocation * Location;
         double distanceMeters;
-        double distanceMiles;
+        //double distance;
         NSDictionary *theCustomer;
         NSMutableArray *myItems = [[NSMutableArray alloc] init];
         
         for (PFObject *object in objects) {
           Location = [[CLLocation alloc] initWithLatitude:[object[@"Latitude"] floatValue] longitude:[object[@"Longitud"] floatValue]];
           distanceMeters = [currentLocation distanceFromLocation:Location];
-          distanceMiles = distanceMeters / 1600;
+          
           NSString * distanceStr;
-          if (distanceMiles > 1000) {
-            distanceStr = @">1000";
+          if (_unitIsMile == 0) {
+            distanceStr = [NSString stringWithFormat:@"%.2f km", distanceMeters / 1000];
           }
           else {
-            distanceStr= [NSString stringWithFormat:@"%.2f", distanceMiles];
+            distanceStr = [NSString stringWithFormat:@"%.2f mi", distanceMeters / 1600];
           }
+          
+         /* NSString * distanceStr = [NSString stringWithFormat:@"%.2f", distance];
+          if (distance > 1000) {
+            distanceStr = @">1000";
+          }*/
+          
           theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
                          object[@"Name"], @"name",
                          object[@"Address"], @"address",
@@ -123,9 +136,9 @@
          -------------- Sort By different categories -------------- 
          */
         NSString * sortByStr;
-        if ([[userInfo objectForKey:@"sortType"] isEqual:@"Name"]) {
+        if ([[userInfo objectForKey:@"sortType"] isEqual:@"byName"]) {
           sortByStr = @"name";
-        } else if ([[userInfo objectForKey:@"sortType"] isEqual:@"State"]) {
+        } else if ([[userInfo objectForKey:@"sortType"] isEqual:@"byState"]) {
           sortByStr = @"State";
         } else {
           sortByStr = @"distance";
@@ -141,8 +154,8 @@
         
         // Insert sorted Object into tempDictionary
         int sortCount;
-        if ([[userInfo objectForKey:@"sortType"] isEqual:@"NearbyFour"]) {
-          sortCount = 4;
+        if ([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyFour"]) {
+          sortCount = 4 < (int)[sortedArray count] ? 4 : (int)[sortedArray count];
         }
         else {
           sortCount = (int)[sortedArray count];
@@ -152,40 +165,6 @@
           [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
         }
         
-      } else {
-        // Log details of the failure
-        NSLog(@"Error: %@ %@", error, [error userInfo]);
-      }
-      
-      replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
-      reply(replyInfo);
-    }];
-  }
-  
-  
-  /*
-   * For NearbyMapController
-   */
-  if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"NearbyMap"]) {
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"location"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-      
-      NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
-      NSDictionary * replyInfo;
-      
-      if (!error) {
-        NSDictionary *theCustomer;
-        
-        for (PFObject *object in objects) {
-          NSString *tempstr1 = object.objectId;
-          theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
-                         object[@"Name"], @"name",
-                         object[@"Latitude"], @"latitude",
-                         object[@"Longitud"], @"longitude",nil];
-          
-          [tempDictionary setObject:theCustomer forKey:tempstr1];
-        }
       } else {
         // Log details of the failure
         NSLog(@"Error: %@ %@", error, [error userInfo]);

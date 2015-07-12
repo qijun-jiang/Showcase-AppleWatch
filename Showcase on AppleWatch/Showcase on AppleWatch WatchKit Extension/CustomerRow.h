@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *Name;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *Distance;
 @property bool isCustomer;
+@property NSString *categoryName;
+@property NSInteger categoryIndex;
 
 @end

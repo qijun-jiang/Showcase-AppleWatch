@@ -10,7 +10,7 @@
 
 @implementation CustomerRow
 
-- (id) init {
+- (id) initWithCustomerInfo:(NSDictionary *)info {
   self = [super init];
   _isCustomer = true;
   return self;

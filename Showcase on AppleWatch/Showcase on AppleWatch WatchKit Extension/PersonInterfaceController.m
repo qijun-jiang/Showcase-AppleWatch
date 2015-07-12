@@ -17,9 +17,9 @@
 - (void)awakeWithContext:(id)context {
     NSDictionary *theCustomer = [[NSDictionary alloc] initWithDictionary:context];
     [super awakeWithContext:context];
-    [_Name setText:[NSString stringWithFormat:@"Name: %@", [theCustomer objectForKey:@"name"]]];
-    [_Address setText:[NSString stringWithFormat:@"Address: %@", [theCustomer objectForKey: @"address"]]];
-    [_Distance setText:[NSString stringWithFormat:@"Distance: %@ Mi", [theCustomer objectForKey: @"distance"]]];
+    [_Name setText:[NSString stringWithFormat:@"%@", [theCustomer objectForKey:@"name"]]];
+    [_Address setText:[NSString stringWithFormat:@"%@", [theCustomer objectForKey: @"address"]]];
+    [_Distance setText:[NSString stringWithFormat:@"%@ away", [theCustomer objectForKey: @"distance"]]];
     // Configure interface objects here.
   
   MKCoordinateSpan coordinateSpan = MKCoordinateSpanMake(0.05, 0.05);

@@ -23,8 +23,8 @@
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
-    [WKInterfaceController openParentApplication:@{@"getCustomers": @"NearbyList",
-                                                   @"sortType": @"NearbyAll"} reply:^(NSDictionary *replyInfo,   NSError *error) {
+    [WKInterfaceController openParentApplication:@{@"getCustomers": @"customerList",
+                                                   @"sortType": @"nearbyAll"} reply:^(NSDictionary *replyInfo,   NSError *error) {
       if (error) {
         NSLog(@"---------------ERROR:%@", error);
       }
@@ -36,12 +36,10 @@
           NSDictionary * theCustomer = [replyInfo valueForKeyPath:[@(i) stringValue]];
           CustomerRow* theRow = [self.customerTable rowControllerAtIndex:i];
           [theRow.Name setText:[theCustomer objectForKey:@"name"]];
-          [theRow.Distance setText:[theCustomer objectForKey:@"distance"]];
+          [theRow.Distance setText:[[theCustomer objectForKey:@"distance"] stringByAppendingString:@"》"]];
         }
       }
     }];
-  
-  
 }
 
 - (void)didDeactivate {
