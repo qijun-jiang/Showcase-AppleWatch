@@ -8,7 +8,7 @@
         <!--Nearby-->
         <scene sceneID="Z9S-fA-22i">
             <objects>
-                <controller title="Nearby" id="hsk-HL-36P" customClass="NearbyInterfaceController">
+                <controller identifier="NearbyController" title="Nearby" id="hsk-HL-36P" customClass="NearbyInterfaceController">
                     <items>
                         <group width="1" height="1" alignment="left" layout="vertical" id="3kV-76-gUy">
                             <items>
@@ -69,7 +69,7 @@
                                         <tableRow identifier="CharacterRow" id="Qii-J9-kqW" customClass="CustomerRow">
                                             <group key="rootItem" width="1" height="27.5" alignment="left" radius="0.0" id="g8c-b1-tgZ">
                                                 <items>
-                                                    <label width="73.5" height="35.5" alignment="left" verticalAlignment="center" text="Label" id="Rds-o6-xOQ">
+                                                    <label width="1" height="35.5" alignment="left" verticalAlignment="center" text="Label" id="Rds-o6-xOQ">
                                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="font" type="italicSystem" pointSize="16"/>
                                                     </label>
@@ -229,11 +229,7 @@
                         <label width="1" alignment="left" text="Label" numberOfLines="0" id="9aO-F5-yuf">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <button width="1" alignment="left" verticalAlignment="bottom" title="Recent Orders" id="ogK-bb-Sir">
-                            <connections>
-                                <segue destination="oeB-lk-qJC" kind="push" id="OSr-MD-ffj"/>
-                            </connections>
-                        </button>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Recent Orders" id="ogK-bb-Sir"/>
                         <label width="1" alignment="left" text="Label" numberOfLines="0" minimumScaleFactor="0.80000000000000004" id="EeA-Mr-r71">
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
@@ -244,6 +240,30 @@
                         </label>
                         <map height="100" alignment="left" id="fBC-Ba-tBn"/>
                     </items>
+                    <menu key="menu" id="e3Z-hL-cKf">
+                        <items>
+                            <menuItem title="Nearby " image="Nearby-icon.png" id="m5f-oq-RpH">
+                                <connections>
+                                    <action selector="nearbySegue" destination="NcT-OW-37W" id="kgA-G5-U5z"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Name" icon="play" id="yIv-D8-C1W" userLabel="By Name">
+                                <connections>
+                                    <action selector="nameSegue" destination="NcT-OW-37W" id="YaU-CN-xjQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="State" icon="play" id="x8S-Se-F1J" userLabel="By State">
+                                <connections>
+                                    <action selector="stateSegue" destination="NcT-OW-37W" id="bZa-1F-Gvz"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Settings" icon="play" id="hYF-UT-ypS">
+                                <connections>
+                                    <action selector="settingsSegue" destination="NcT-OW-37W" id="Ebz-H8-rc3"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="Address" destination="EeA-Mr-r71" id="WV1-WV-uFs"/>
                         <outlet property="Distance" destination="IhM-DG-Ba9" id="F8e-fr-bhf"/>
@@ -253,13 +273,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="135" y="15.25"/>
-        </scene>
-        <!--Order-->
-        <scene sceneID="C4n-1l-cnJ">
-            <objects>
-                <controller title="Order" id="oeB-lk-qJC"/>
-            </objects>
-            <point key="canvasLocation" x="394" y="16"/>
         </scene>
         <!--Settings-->
         <scene sceneID="ir6-1h-xnn">
@@ -279,6 +292,24 @@
                                 <button width="67" alignment="center" title="mi" id="hHj-t5-SH0">
                                     <connections>
                                         <action selector="miButtonClicked" destination="j7L-Y8-gW5" id="oGH-GX-mH4"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <label width="136" alignment="left" text="Unit" id="1FI-63-mnI">
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </label>
+                        <group width="1" height="39" alignment="left" id="vJY-Ne-Jex">
+                            <items>
+                                <button width="63" alignment="center" title="km" id="lyW-v5-6iT">
+                                    <connections>
+                                        <action selector="kmButtonClicked" destination="j7L-Y8-gW5" id="TVc-hP-ydg"/>
+                                    </connections>
+                                </button>
+                                <button width="67" alignment="center" title="mi" id="ZFr-hv-gmg">
+                                    <connections>
+                                        <action selector="miButtonClicked" destination="j7L-Y8-gW5" id="G7f-UJ-V2K"/>
                                     </connections>
                                 </button>
                             </items>

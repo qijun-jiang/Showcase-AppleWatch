@@ -35,6 +35,18 @@
   [self.MapView addAnnotation:Location withPinColor: WKInterfaceMapPinColorRed];
   [self.MapView setRegion:(MKCoordinateRegionMake(Location, coordinateSpan))];
 }
+- (IBAction)nearbySegue {
+  [self pushControllerWithName:@"NearbyController" context:nil];
+}
+- (IBAction)nameSegue {
+  [self pushControllerWithName:@"ListController" context:@"byName"];
+}
+- (IBAction)stateSegue {
+  [self pushControllerWithName:@"ListController" context:@"byState"];
+}
+- (IBAction)settingsSegue {
+  [self pushControllerWithName:@"SettingsController" context:nil];
+}
 
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user

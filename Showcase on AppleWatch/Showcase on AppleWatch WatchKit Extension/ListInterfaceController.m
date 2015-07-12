@@ -57,8 +57,9 @@
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
   CustomerRow *selectedRow = [table rowControllerAtIndex:rowIndex];
+  NSString *selectedRowName = selectedRow.categoryName;
   if (selectedRow.isCustomer == false) {
-    NSLog(@"------notCustomer");
+    NSLog(@"------notCustomer: theIndex = %ld, _selectedRowIndex = %d, min = %ld, length = %ld", (long)rowIndex, _selectedRowIndex, (long)_minIndex, (long)_listLength);
     NSIndexSet *indexes;
     if (_selectedRowIndex != -1) {
       indexes = [[NSIndexSet alloc]initWithIndexesInRange: NSMakeRange(_minIndex, _listLength)];
@@ -69,15 +70,20 @@
       return;
     }
     
-    NSArray *thisCategory = [[NSArray alloc] initWithArray:[_customerList objectForKey:selectedRow.categoryName]];
+    NSArray *thisCategory = [[NSArray alloc] initWithArray:[_customerList objectForKey:selectedRowName]];
     _selectedRowIndex = (int)rowIndex;
-    _minIndex = rowIndex + 1;
+    if (_minIndex < rowIndex) {
+      _minIndex = rowIndex + 1 - _listLength;
+    }
+    else {
+      _minIndex = rowIndex + 1;
+    }
     _listLength = thisCategory.count;
     indexes = [[NSIndexSet alloc]initWithIndexesInRange: NSMakeRange(_minIndex, _listLength)];
     
     [self.characterTable insertRowsAtIndexes:indexes withRowType:@"CustomerRow"];
     for (int i = 0; i < thisCategory.count; i++) {
-      CustomerRow* theRow = [self.characterTable rowControllerAtIndex:i+rowIndex+1];
+      CustomerRow* theRow = [self.characterTable rowControllerAtIndex:i+_minIndex];
       NSDictionary * theCustomer = [thisCategory objectAtIndex:i];
       [theRow.Name setText:[theCustomer objectForKey:@"name"]];
       [theRow.Distance setText:[[theCustomer objectForKey:@"distance"] stringByAppendingString:@"》"]];
