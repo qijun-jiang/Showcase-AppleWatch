@@ -140,8 +140,11 @@
           sortByStr = @"name";
         } else if ([[userInfo objectForKey:@"sortType"] isEqual:@"byState"]) {
           sortByStr = @"State";
-        } else {
+        } else if ([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyFour"]) {
           sortByStr = @"distance";
+        } else {
+          NSLog(@"Doesn't recognize sort type.");
+          assert(0);
         }
         
         // Sort this array with compare, Shiny Blocks!!!!
@@ -156,13 +159,52 @@
         int sortCount;
         if ([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyFour"]) {
           sortCount = 4 < (int)[sortedArray count] ? 4 : (int)[sortedArray count];
+          for (int i = 0; i < sortCount; i++) {
+            id myArrayElement = [sortedArray objectAtIndex:i];
+            [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
+          }
         }
         else {
           sortCount = (int)[sortedArray count];
-        }
-        for (int i = 0; i < sortCount; i++) {
-          id myArrayElement = [sortedArray objectAtIndex:i];
-          [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
+          
+          // ----------------- BEGIN: To be coded ------------------ //
+          if ([[userInfo objectForKey:@"sortType"] isEqual:@"byName"]) {
+            for (int i = 0; i < sortCount; i++) {
+              id myArrayElement = [sortedArray objectAtIndex:i];
+              
+              NSString * firstLetter = [[[(NSDictionary*)myArrayElement valueForKeyPath:@"name"] substringToIndex:1] uppercaseString]; // All swtiched to upper case
+              
+              if ([tempDictionary objectForKey:firstLetter]) {
+                // if exists such array, add element
+                [[tempDictionary valueForKeyPath:firstLetter] addObject:myArrayElement];
+              } else {
+                // if NOT exists such array, create one
+                NSMutableArray *arrayAtDict = [[NSMutableArray alloc] init];
+                [arrayAtDict addObject:myArrayElement];
+                [tempDictionary setObject:arrayAtDict forKey:firstLetter];
+              }
+            }
+            
+          } else {
+            for (int i = 0; i < sortCount; i++) {
+              id myArrayElement = [sortedArray objectAtIndex:i];
+              id firstLetter = [[myArrayElement valueForKeyPath:@"state"] uppercaseString];
+              
+              if ([tempDictionary objectForKey:firstLetter]) {
+                // if exists such array, add element
+                [[tempDictionary valueForKeyPath:firstLetter] addObject:myArrayElement];
+              } else {
+                // if NOT exists such array, create one
+                NSMutableArray *arrayAtDict = [[NSMutableArray alloc] init];
+                [arrayAtDict addObject:myArrayElement];
+                [tempDictionary setObject:arrayAtDict forKey:firstLetter];
+              }
+              
+            }
+            
+          }
+          
+          // ----------------- END: To be coded ------------------ //
         }
         
       } else {
