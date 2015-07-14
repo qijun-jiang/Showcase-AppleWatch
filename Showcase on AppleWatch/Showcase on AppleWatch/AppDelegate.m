@@ -95,7 +95,7 @@
               CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location
-       // CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
+        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.584939" floatValue]];
         
         CLLocation * Location;
         double distanceMeters;
@@ -142,6 +142,8 @@
           sortByStr = @"State";
         } else if ([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyFour"]) {
           sortByStr = @"distance";
+        } else if ([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyAll"]) {
+          sortByStr = @"distance";
         } else {
           NSLog(@"Doesn't recognize sort type.");
           assert(0);
@@ -150,15 +152,34 @@
         // Sort this array with compare, Shiny Blocks!!!!
         NSArray *sortedArray;
         sortedArray = [myItems sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-          NSString *first = [(NSDictionary*)a valueForKeyPath:sortByStr];
-          NSString *second = [(NSDictionary*)b valueForKeyPath:sortByStr];
-          return [first compare:second];
+          if ([sortByStr isEqual:@"distance"]) {
+            float first =  [[(NSDictionary*)a valueForKeyPath:sortByStr] floatValue];
+            float second = [[(NSDictionary*)b valueForKeyPath:sortByStr] floatValue];
+            return (first > second);
+          }
+          else {
+            NSString *first = [(NSDictionary*)a valueForKeyPath:sortByStr];
+            NSString *second = [(NSDictionary*)b valueForKeyPath:sortByStr];
+            return [first compare:second];
+          }
         }];
         
         // Insert sorted Object into tempDictionary
         int sortCount;
         if ([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyFour"]) {
-          sortCount = 4 < (int)[sortedArray count] ? 4 : (int)[sortedArray count];
+          if ((int)[sortedArray count] > 4) {
+            sortCount = 4;
+          }
+          else {
+            sortCount = (int)[sortedArray count];
+          }
+          for (int i = 0; i < sortCount; i++) {
+            id myArrayElement = [sortedArray objectAtIndex:i];
+            [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
+          }
+        }
+        else if([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyAll"]) {
+          sortCount = (int)[sortedArray count];
           for (int i = 0; i < sortCount; i++) {
             id myArrayElement = [sortedArray objectAtIndex:i];
             [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
@@ -168,40 +189,32 @@
           sortCount = (int)[sortedArray count];
           
           // ----------------- BEGIN: To be coded ------------------ //
-          if ([[userInfo objectForKey:@"sortType"] isEqual:@"byName"]) {
-            for (int i = 0; i < sortCount; i++) {
-              id myArrayElement = [sortedArray objectAtIndex:i];
-              
-              NSString * firstLetter = [[[(NSDictionary*)myArrayElement valueForKeyPath:@"name"] substringToIndex:1] uppercaseString]; // All swtiched to upper case
-              
-              if ([tempDictionary objectForKey:firstLetter]) {
-                // if exists such array, add element
-                [[tempDictionary valueForKeyPath:firstLetter] addObject:myArrayElement];
-              } else {
-                // if NOT exists such array, create one
-                NSMutableArray *arrayAtDict = [[NSMutableArray alloc] init];
-                [arrayAtDict addObject:myArrayElement];
-                [tempDictionary setObject:arrayAtDict forKey:firstLetter];
-              }
-            }
+          
+          for (int i = 0; i < sortCount; i++) {
+            id myArrayElement = [sortedArray objectAtIndex:i];
             
-          } else {
-            for (int i = 0; i < sortCount; i++) {
-              id myArrayElement = [sortedArray objectAtIndex:i];
-              id firstLetter = [[myArrayElement valueForKeyPath:@"state"] uppercaseString];
-              
-              if ([tempDictionary objectForKey:firstLetter]) {
-                // if exists such array, add element
-                [[tempDictionary valueForKeyPath:firstLetter] addObject:myArrayElement];
+            NSString * firstLetter; // All swtiched to upper case
+            if ([[userInfo objectForKey:@"sortType"] isEqual:@"byName"]) {
+              // If starts with letter.
+              if ([[NSCharacterSet letterCharacterSet] characterIsMember:[[(NSDictionary*)myArrayElement valueForKeyPath:@"name"] characterAtIndex:0]]) {
+                firstLetter = [[[(NSDictionary*)myArrayElement valueForKeyPath:@"name"] substringToIndex:1] uppercaseString];
               } else {
-                // if NOT exists such array, create one
-                NSMutableArray *arrayAtDict = [[NSMutableArray alloc] init];
-                [arrayAtDict addObject:myArrayElement];
-                [tempDictionary setObject:arrayAtDict forKey:firstLetter];
+                firstLetter = @"#";
               }
               
+            } else {
+              firstLetter = [[myArrayElement valueForKeyPath:@"state"] uppercaseString];
             }
             
+            if ([tempDictionary objectForKey:firstLetter]) {
+              // if exists such array, add element
+              [[tempDictionary valueForKeyPath:firstLetter] addObject:myArrayElement];
+            } else {
+              // if NOT exists such array, create one
+              NSMutableArray *arrayAtDict = [[NSMutableArray alloc] init];
+              [arrayAtDict addObject:myArrayElement];
+              [tempDictionary setObject:arrayAtDict forKey:firstLetter];
+            }
           }
           
           // ----------------- END: To be coded ------------------ //

@@ -34,22 +34,18 @@
         return;
       }
       else {
-        NSDictionary * theCustomer = [[replyInfo allValues] objectAtIndex:0];
+        NSDictionary * theCustomer = [replyInfo valueForKeyPath:[@(0) stringValue]];
         if (replyInfo.count == 1) {
           [_nearestDescription setText:[NSString stringWithFormat:@"The nearest customer is %@ away", [theCustomer objectForKey:@"distance"]]];
         }
         else {
-          NSDictionary *anotherCustomer = [[replyInfo allValues] objectAtIndex:(replyInfo.count - 1)];
+          NSDictionary *anotherCustomer = [replyInfo valueForKeyPath:[@(replyInfo.count - 1) stringValue]];
           [_nearestDescription setText:[NSString stringWithFormat:@"The nearest %ld customers are from %@ to %@ away", replyInfo.count, [theCustomer objectForKey:@"distance"], [anotherCustomer objectForKey:@"distance"]]];
         }
       }
       
       _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
       [self.nearestFourTable setNumberOfRows:replyInfo.count withRowType:@"CustomerRow"];
-      NSLog(@"num = %ld", (long)[_nearestFourTable numberOfRows]);
-      
-      NSDictionary * theCustomer;
-      CustomerRow * theRow;
       
       MKCoordinateSpan coordinateSpan = MKCoordinateSpanMake(0.05, 0.05);
       NSMutableArray * locations = [[NSMutableArray alloc] init];
@@ -60,8 +56,8 @@
       MKPointAnnotation * point;
       
       for (int i = 0; i < replyInfo.count; i++) {
-        theCustomer = [[replyInfo allValues] objectAtIndex:i];
-        theRow = [self.nearestFourTable rowControllerAtIndex:i];
+        NSDictionary * theCustomer = [replyInfo valueForKeyPath:[@(i) stringValue]];
+        CustomerRow * theRow = [self.nearestFourTable rowControllerAtIndex:i];
         
         [theRow.Name setText:[theCustomer objectForKey:@"name"]];
         [theRow.Distance setText:[[theCustomer objectForKey:@"distance"] stringByAppendingString:@"》"]];
@@ -95,7 +91,7 @@
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
-  NSDictionary * theCustomer = [[_customerList allValues] objectAtIndex:rowIndex];
+  NSDictionary * theCustomer = [_customerList valueForKeyPath:[@(rowIndex) stringValue]];
   [self pushControllerWithName:@"PersonController" context:theCustomer];
 }
 

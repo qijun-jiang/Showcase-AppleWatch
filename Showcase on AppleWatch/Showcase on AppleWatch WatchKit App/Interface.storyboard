@@ -10,13 +10,13 @@
             <objects>
                 <controller identifier="NearbyController" title="Nearby" id="hsk-HL-36P" customClass="NearbyInterfaceController">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="vertical" id="3kV-76-gUy">
+                        <group height="1" alignment="left" layout="vertical" id="3kV-76-gUy">
                             <items>
-                                <label width="1" alignment="left" text="Nearest 4 customers" textAlignment="left" numberOfLines="0" minimumScaleFactor="0.80000000000000004" id="0dO-YE-QwI">
+                                <label width="1" alignment="left" text="Loading..." textAlignment="left" numberOfLines="0" minimumScaleFactor="0.80000000000000004" id="0dO-YE-QwI">
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="font" type="system" pointSize="15"/>
                                 </label>
-                                <map height="109" alignment="left" id="XnO-CA-zfQ"/>
+                                <map height="105" alignment="left" id="XnO-CA-zfQ"/>
                             </items>
                         </group>
                         <table alignment="left" id="lMO-dG-r8g">
@@ -119,7 +119,7 @@
                                 <button alignment="left" id="8h7-5x-HQ3">
                                     <group key="contentGroup" width="68" height="54" alignment="left" id="5lq-Th-ELi">
                                         <items>
-                                            <imageView width="54" height="54" alignment="center" image="Nearby-icon.png" id="km0-X6-DUy"/>
+                                            <imageView width="54" height="54" alignment="center" image="Nearby-icon" id="km0-X6-DUy"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -129,7 +129,7 @@
                                 <button alignment="right" id="9Tg-ZB-M4E">
                                     <group key="contentGroup" width="68" height="54" alignment="left" id="fz4-zj-XdG">
                                         <items>
-                                            <imageView width="54" height="54" alignment="center" image="Name-icon.png" id="ed0-d3-dl5"/>
+                                            <imageView width="54" height="54" alignment="center" image="Name-icon" id="ed0-d3-dl5"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -153,7 +153,7 @@
                                 <button alignment="left" id="x7V-6j-y1G">
                                     <group key="contentGroup" width="68" height="65.5" alignment="left" id="vU0-I7-U4Z">
                                         <items>
-                                            <imageView width="54" height="54" alignment="center" image="icon-city.png" id="S5A-Qg-cQV"/>
+                                            <imageView width="54" height="54" alignment="center" image="icon-city" id="S5A-Qg-cQV"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -163,7 +163,7 @@
                                 <button alignment="right" id="k0P-yl-OaJ">
                                     <group key="contentGroup" width="68" height="65.5" alignment="left" id="0UN-GV-5aO">
                                         <items>
-                                            <imageView width="57" height="57" alignment="center" image="Settings-icon.png" id="WoD-QJ-jFP"/>
+                                            <imageView width="57" height="57" alignment="center" image="Settings-icon" id="WoD-QJ-jFP"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -242,22 +242,22 @@
                     </items>
                     <menu key="menu" id="e3Z-hL-cKf">
                         <items>
-                            <menuItem title="Nearby " image="Nearby-icon.png" id="m5f-oq-RpH">
+                            <menuItem title="Nearby " icon="play" id="m5f-oq-RpH">
                                 <connections>
                                     <action selector="nearbySegue" destination="NcT-OW-37W" id="kgA-G5-U5z"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Name" icon="play" id="yIv-D8-C1W" userLabel="By Name">
+                            <menuItem title="By Name" icon="play" id="yIv-D8-C1W" userLabel="By Name">
                                 <connections>
                                     <action selector="nameSegue" destination="NcT-OW-37W" id="YaU-CN-xjQ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="State" icon="play" id="x8S-Se-F1J" userLabel="By State">
+                            <menuItem title="By State" icon="play" id="x8S-Se-F1J" userLabel="By State">
                                 <connections>
                                     <action selector="stateSegue" destination="NcT-OW-37W" id="bZa-1F-Gvz"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Settings" icon="play" id="hYF-UT-ypS">
+                            <menuItem title="Settings" icon="more" id="hYF-UT-ypS">
                                 <connections>
                                     <action selector="settingsSegue" destination="NcT-OW-37W" id="Ebz-H8-rc3"/>
                                 </connections>
@@ -279,7 +279,7 @@
             <objects>
                 <controller identifier="SettingsController" title="Settings" id="j7L-Y8-gW5" customClass="SettingsInterfaceController">
                     <items>
-                        <label width="136" alignment="left" text="Unit" id="7jZ-Nu-pXx">
+                        <label width="136" alignment="left" text="Distance Unit" id="7jZ-Nu-pXx">
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </label>
                         <group width="1" height="39" alignment="left" id="IOB-oL-eB1">
@@ -297,19 +297,20 @@
                             </items>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
-                        <label width="136" alignment="left" text="Unit" id="1FI-63-mnI">
+                        <label width="136" alignment="left" text="Distance / Time" id="1FI-63-mnI">
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </label>
                         <group width="1" height="39" alignment="left" id="vJY-Ne-Jex">
                             <items>
-                                <button width="63" alignment="center" title="km" id="lyW-v5-6iT">
+                                <button width="63" alignment="center" title="Distance" id="lyW-v5-6iT">
+                                    <fontDescription key="font" type="system" pointSize="12"/>
                                     <connections>
-                                        <action selector="kmButtonClicked" destination="j7L-Y8-gW5" id="TVc-hP-ydg"/>
+                                        <action selector="distanceButtonClicked" destination="j7L-Y8-gW5" id="88D-gD-mGE"/>
                                     </connections>
                                 </button>
-                                <button width="67" alignment="center" title="mi" id="ZFr-hv-gmg">
+                                <button width="67" alignment="center" title="Time" id="ZFr-hv-gmg">
                                     <connections>
-                                        <action selector="miButtonClicked" destination="j7L-Y8-gW5" id="G7f-UJ-V2K"/>
+                                        <action selector="timeButtonClicked" destination="j7L-Y8-gW5" id="cD7-b0-eXx"/>
                                     </connections>
                                 </button>
                             </items>
@@ -317,8 +318,10 @@
                         </group>
                     </items>
                     <connections>
+                        <outlet property="distanceButton" destination="lyW-v5-6iT" id="hea-D5-74n"/>
                         <outlet property="kmButton" destination="fgt-6C-838" id="2FM-vL-CUb"/>
                         <outlet property="miButton" destination="hHj-t5-SH0" id="88A-WG-j7C"/>
+                        <outlet property="timeButton" destination="ZFr-hv-gmg" id="YxR-md-hdn"/>
                     </connections>
                 </controller>
             </objects>

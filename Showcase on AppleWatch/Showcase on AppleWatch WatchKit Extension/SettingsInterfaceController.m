@@ -25,6 +25,7 @@
   _prevUnit = [sharedSetting getUnitIsMile];
     if (_prevUnit == 0) {
       [self kmButtonClicked];
+      [self distanceButtonClicked];
     }
     else {
       [self miButtonClicked];
@@ -63,6 +64,14 @@
       }
     }];
   }
+}
+- (IBAction)distanceButtonClicked {
+  [_distanceButton setBackgroundColor: _selectedColor];
+  [_timeButton setBackgroundColor: _originColor];
+}
+- (IBAction)timeButtonClicked {
+  [_distanceButton setBackgroundColor: _originColor];
+  [_timeButton setBackgroundColor: _selectedColor];
 }
 
 - (void)willActivate {

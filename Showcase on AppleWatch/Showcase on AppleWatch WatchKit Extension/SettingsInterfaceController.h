@@ -13,5 +13,7 @@
 @interface SettingsInterfaceController : WKInterfaceController
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *kmButton;
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *miButton;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *distanceButton;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *timeButton;
 
 @end

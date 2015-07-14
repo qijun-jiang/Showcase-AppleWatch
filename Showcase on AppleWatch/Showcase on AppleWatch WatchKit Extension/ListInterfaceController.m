@@ -34,12 +34,22 @@
       else {
         NSLog(@"------------RIGHT!");
         _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
+       
+        // Sort this array with compare, Shiny Blocks!!!!
+        NSMutableArray *myItems = [[NSMutableArray alloc] initWithArray:[replyInfo allKeys] copyItems:YES];
+        NSArray *sortedArray;
+        sortedArray = [myItems sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+          NSString *first = a;
+          NSString *second = b;
+          return [first compare:second];
+        }];
+        
         [self.characterTable setNumberOfRows:replyInfo.count withRowType:@"CharacterRow"];
         for (int i = 0; i < replyInfo.count; i++) {
           CustomerRow *theRow = [self.characterTable rowControllerAtIndex:i];
-          [theRow.Name setText:[[replyInfo allKeys] objectAtIndex:i] ];
+          [theRow.Name setText:[sortedArray objectAtIndex:i] ];
           theRow.isCustomer = false;
-          theRow.categoryName = [[replyInfo allKeys] objectAtIndex:i];
+          theRow.categoryName = [sortedArray objectAtIndex:i];
         }
       }
   }];
@@ -48,6 +58,9 @@
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
+    _selectedRowIndex = -1;
+    _minIndex = 0;
+    _listLength = 0;
 }
 
 - (void)didDeactivate {
@@ -58,12 +71,16 @@
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
   CustomerRow *selectedRow = [table rowControllerAtIndex:rowIndex];
   NSString *selectedRowName = selectedRow.categoryName;
+  NSInteger theIndex = rowIndex;
   if (selectedRow.isCustomer == false) {
     NSLog(@"------notCustomer: theIndex = %ld, _selectedRowIndex = %d, min = %ld, length = %ld", (long)rowIndex, _selectedRowIndex, (long)_minIndex, (long)_listLength);
     NSIndexSet *indexes;
     if (_selectedRowIndex != -1) {
       indexes = [[NSIndexSet alloc]initWithIndexesInRange: NSMakeRange(_minIndex, _listLength)];
       [self.characterTable removeRowsAtIndexes:indexes];
+      if (_minIndex < rowIndex) {
+        theIndex = theIndex - _listLength;
+      }
     }
     if (_selectedRowIndex == rowIndex) {
       _selectedRowIndex = -1;
@@ -72,12 +89,7 @@
     
     NSArray *thisCategory = [[NSArray alloc] initWithArray:[_customerList objectForKey:selectedRowName]];
     _selectedRowIndex = (int)rowIndex;
-    if (_minIndex < rowIndex) {
-      _minIndex = rowIndex + 1 - _listLength;
-    }
-    else {
-      _minIndex = rowIndex + 1;
-    }
+    _minIndex = theIndex + 1;
     _listLength = thisCategory.count;
     indexes = [[NSIndexSet alloc]initWithIndexesInRange: NSMakeRange(_minIndex, _listLength)];
     
@@ -89,6 +101,7 @@
       [theRow.Distance setText:[[theCustomer objectForKey:@"distance"] stringByAppendingString:@"》"]];
       theRow.categoryName = selectedRow.categoryName;
       theRow.categoryIndex = i;
+      theRow.isCustomer = true;
     }
   }
   else {

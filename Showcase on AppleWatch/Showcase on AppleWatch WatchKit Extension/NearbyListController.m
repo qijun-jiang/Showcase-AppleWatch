@@ -48,7 +48,7 @@
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
-  NSDictionary * theCustomer = [[_customerList allValues] objectAtIndex:rowIndex];
+  NSDictionary * theCustomer = [_customerList valueForKeyPath:[@(rowIndex) stringValue]];
   [self pushControllerWithName:@"PersonController" context:theCustomer];
 }
 
