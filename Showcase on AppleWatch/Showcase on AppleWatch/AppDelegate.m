@@ -92,10 +92,10 @@
               lm.distanceFilter = kCLHeadingFilterNone;
               [lm requestWhenInUseAuthorization];
               [lm startUpdatingLocation];
-              CLLocation *currentLocation = [lm location];
+              //CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location
-        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.584939" floatValue]];
+        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.584939" floatValue]];
         
         CLLocation * Location;
         double distanceMeters;

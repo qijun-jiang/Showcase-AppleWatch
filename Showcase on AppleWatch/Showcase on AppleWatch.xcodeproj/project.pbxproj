@@ -21,7 +21,6 @@
 		8F7525B61B1D755600C9FD37 /* Showcase on AppleWatch WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 8F7525B51B1D755600C9FD37 /* Showcase on AppleWatch WatchKit App.app */; };
 		8F7525C01B1D755600C9FD37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7525BF1B1D755600C9FD37 /* Images.xcassets */; };
 		8F7525C31B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8F7525A61B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8F8BEE6F1B2BFBE700E4F71E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8BEE6E1B2BFBE700E4F71E /* MapViewController.m */; };
 		8F8BEE731B2C46B800E4F71E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8BEE721B2C46B800E4F71E /* MapKit.framework */; };
 		DDBD78911B4A9C9200CEA73D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BC1B4A5A8500729D3C /* Parse.framework */; };
 		DDBD78921B4A9CAC00CEA73D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BE1B4A5A8C00729D3C /* Bolts.framework */; };
@@ -119,8 +118,6 @@
 		8F7525B51B1D755600C9FD37 /* Showcase on AppleWatch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Showcase on AppleWatch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F7525BB1B1D755600C9FD37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F7525BF1B1D755600C9FD37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8F8BEE6D1B2BFBE700E4F71E /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		8F8BEE6E1B2BFBE700E4F71E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		8F8BEE721B2C46B800E4F71E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EF16748A1B4A4AC500729D3C /* CustomerRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerRow.h; sourceTree = "<group>"; };
 		EF16748B1B4A4AC500729D3C /* CustomerRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerRow.m; sourceTree = "<group>"; };
@@ -252,8 +249,6 @@
 				8F7525831B1D753400C9FD37 /* ViewController.h */,
 				8F7525841B1D753400C9FD37 /* ViewController.m */,
 				8F7525861B1D753400C9FD37 /* Main.storyboard */,
-				8F8BEE6D1B2BFBE700E4F71E /* MapViewController.h */,
-				8F8BEE6E1B2BFBE700E4F71E /* MapViewController.m */,
 				8F7525891B1D753400C9FD37 /* Images.xcassets */,
 				8F75258B1B1D753400C9FD37 /* LaunchScreen.xib */,
 				8F75257C1B1D753300C9FD37 /* Supporting Files */,
@@ -521,7 +516,6 @@
 				8F7525851B1D753400C9FD37 /* ViewController.m in Sources */,
 				8F7525821B1D753400C9FD37 /* AppDelegate.m in Sources */,
 				8F75257F1B1D753400C9FD37 /* main.m in Sources */,
-				8F8BEE6F1B2BFBE700E4F71E /* MapViewController.m in Sources */,
 				EFF18CAC1B4BFEB7007D6743 /* Customer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
