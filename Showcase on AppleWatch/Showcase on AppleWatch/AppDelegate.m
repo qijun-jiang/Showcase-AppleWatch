@@ -77,7 +77,71 @@
    */
   if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"customerList"]) {
     
-    // Kick off a heavy network request :)
+    // --------------------URL Request--------------------------//
+    NSString *post = [[NSString alloc] initWithFormat:@"{\"root\": {\"parameters\": {\"clientId\"=\"logic091312\", \"methodName\":\"queryCustomerWithAddress\"}}}"];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://www.logicsolutions.com.cn:58080/ShowcaseSaas_cn2.6/SyncServer"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+      
+      NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
+      NSDictionary * replyInfo;
+      
+      NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+      NSArray *customers = [[NSArray alloc] initWithArray:[[dictionary objectForKey:@"content"] objectForKey:@"customer"]];
+      NSLog(@"requestReply: %@", dictionary);
+      
+      CLLocationManager *lm = [[CLLocationManager alloc] init];
+      lm.delegate = self;
+      lm.desiredAccuracy = kCLLocationAccuracyBest;
+      lm.distanceFilter = kCLHeadingFilterNone;
+      [lm requestWhenInUseAuthorization];
+      [lm startUpdatingLocation];
+      //CLLocation *currentLocation = [lm location];
+      
+      // temportary solution, Since we can't get the current location
+      CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.584939" floatValue]];
+      
+      CLLocation * Location;
+      double distanceMeters;
+      //double distance;
+      NSDictionary *theCustomer;
+      NSMutableArray *myItems = [[NSMutableArray alloc] init];
+      
+      for (int i = 0; i < customers.count; i++) {
+        NSDictionary *theObject = [customers objectAtIndex:i];
+        Location = [[CLLocation alloc] initWithLatitude:[theObject[@"Latitude"] floatValue] longitude:[theObject[@"Longitud"] floatValue]];
+        distanceMeters = [currentLocation distanceFromLocation:Location];
+        
+        NSString * distanceStr;
+        if (_unitIsMile == 0) {
+          distanceStr = [NSString stringWithFormat:@"%.2f km", distanceMeters / 1000];
+        }
+        else {
+          distanceStr = [NSString stringWithFormat:@"%.2f mi", distanceMeters / 1600];
+        }
+        
+        theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       theObject[@"customerName"], @"name",
+                       theObject[@"address"], @"address",
+                       theObject[@"state"], @"state",
+                       theObject[@"latitude"], @"latitude",
+                       theObject[@"longitude"], @"longitude",
+                       distanceStr, @"distance", nil];
+        
+        [myItems addObject:theCustomer];
+      }
+      //--------------------For Yang Yang's Code----------------
+    }] resume];
+    
+    //---------------------URL Request end-------------------//
+    
+    //--------------------Parse Request-------------------------//
     PFQuery *query = [PFQuery queryWithClassName:@"location"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
       
@@ -228,6 +292,7 @@
       replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
       reply(replyInfo);
     }];
+    // -------------------Parse Request Ends----------------------------// 
   }
 }
 

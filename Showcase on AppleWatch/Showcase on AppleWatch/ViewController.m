@@ -29,6 +29,41 @@
                             @"byName", @"sortType", nil];
   int _unitIsMile = 0;
 
+  // --------------------URL Request--------------------------//
+  NSString *post = [[NSString alloc] initWithFormat:@"{\"root\": {\"parameters\": {\"clientId\"=\"logic091312\", \"methodName\":\"queryCustomerWithAddress\"}}}"];
+  NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+  NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+  [request setURL:[NSURL URLWithString:@"http://www.logicsolutions.com.cn:58080/ShowcaseSaas_cn2.6/SyncServer"]];
+  [request setHTTPMethod:@"POST"];
+  [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+  [request setHTTPBody:postData];
+  NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+  [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    //NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    NSArray *customers = [[NSArray alloc] initWithArray:[[dictionary objectForKey:@"content"] objectForKey:@"customer"]];
+    for (int i = 0; i < customers.count; i++) {
+      NSDictionary *theObject = [customers objectAtIndex:i];
+      
+      /* NSString * distanceStr = [NSString stringWithFormat:@"%.2f", distance];
+       if (distance > 1000) {
+       distanceStr = @">1000";
+       }*/
+      
+      NSDictionary *theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
+                     theObject[@"customerName"], @"name",
+                     theObject[@"address"], @"address",
+                     theObject[@"state"], @"state",
+                     theObject[@"latitude"], @"latitude",
+                     theObject[@"longitude"], @"longitude",nil];
+      
+      NSLog(@"customer: %@", theCustomer);
+    }
+    //NSLog(@"requestReply: %@", replyarray);
+  }] resume];
+  
+  //---------------------URL Request end-------------------//
   
   
   // ----------------- Interface above ----------------------- //
