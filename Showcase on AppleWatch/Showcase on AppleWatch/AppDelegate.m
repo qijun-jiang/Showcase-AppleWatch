@@ -156,20 +156,33 @@
           NSMutableString* latitude;
           NSMutableString* longitude;
           if (theObject[@"customerName"] == nil || [theObject[@"customerName"] isEqual:[NSNull null]]){
-            customerName = [NSMutableString stringWithString: @""];
+            customerName = [NSMutableString stringWithString: @"unknown"];
           } else {
-            customerName = [NSMutableString stringWithString: theObject[@"customerName"]];
+            if ([theObject[@"customerName"] isEqualToString:@""]) {
+              customerName = [NSMutableString stringWithString: @"unknown"];
+            } else {
+              customerName = [NSMutableString stringWithString: theObject[@"customerName"]];
+            }
           }
           if (theObject[@"address"] == nil || [theObject[@"address"] isEqual:[NSNull null]]){
-            address = [NSMutableString stringWithString: @""];
+            address = [NSMutableString stringWithString: @"unknown"];
           } else {
-            address = [NSMutableString stringWithString: theObject[@"address"]];
+            if ([theObject[@"address"] isEqualToString:@""]) {
+              address = [NSMutableString stringWithString: @"unknown"];
+            } else {
+              address = [NSMutableString stringWithString: theObject[@"address"]];
+            }
           }
           if (theObject[@"state"] == nil || [theObject[@"state"] isEqual:[NSNull null]]){
-            state = [NSMutableString stringWithString: @""];
+            state = [NSMutableString stringWithString: @"unknown"];
           } else {
-            state = [NSMutableString stringWithString: theObject[@"state"]];
+            if ([theObject[@"state"] isEqualToString:@""]) {
+              state = [NSMutableString stringWithString: @"unknown"];
+            } else {
+              state = [NSMutableString stringWithString: theObject[@"state"]];
+            }
           }
+          
           if (theObject[@"latitude"] == nil || [theObject[@"latitude"] isEqual:[NSNull null]]){
             latitude = [NSMutableString stringWithString: @"0"];
           } else {
