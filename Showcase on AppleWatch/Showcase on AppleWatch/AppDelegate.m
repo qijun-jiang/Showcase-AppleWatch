@@ -63,8 +63,17 @@
 }
 
 - (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *replyInfo))reply {
-
-  /* 
+  
+  UIApplication *app = [UIApplication sharedApplication];
+  
+  UIBackgroundTaskIdentifier bgTask __block = [app beginBackgroundTaskWithName:@"watchAppRequest" expirationHandler:^{
+    
+    [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+    bgTask = UIBackgroundTaskInvalid;
+    
+  }];
+  
+  /*
    * For Changing Settings
    */
   if ([userInfo objectForKey:@"setUnitIsMile"] != nil) {
@@ -297,6 +306,10 @@
       }
       
       reply(tempDictionary);
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [app endBackgroundTask:bgTask];
+        bgTask=UIBackgroundTaskInvalid;
+      });
       //replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
       //reply(replyInfo);
     }] resume];
