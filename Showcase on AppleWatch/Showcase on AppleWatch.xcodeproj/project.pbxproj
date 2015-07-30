@@ -22,7 +22,6 @@
 		8F7525C31B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8F7525A61B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8F8BEE731B2C46B800E4F71E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8BEE721B2C46B800E4F71E /* MapKit.framework */; };
 		DDBD78911B4A9C9200CEA73D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BC1B4A5A8500729D3C /* Parse.framework */; };
-		DDBD78921B4A9CAC00CEA73D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BE1B4A5A8C00729D3C /* Bolts.framework */; };
 		EF16748C1B4A4AC500729D3C /* CustomerRow.m in Sources */ = {isa = PBXBuildFile; fileRef = EF16748B1B4A4AC500729D3C /* CustomerRow.m */; };
 		EF1674921B4A4D2500729D3C /* NearbyListController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1674911B4A4D2500729D3C /* NearbyListController.m */; };
 		EF1674A11B4A590000729D3C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674A01B4A590000729D3C /* AudioToolbox.framework */; };
@@ -38,7 +37,7 @@
 		EF1674B51B4A596500729D3C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674B41B4A596500729D3C /* Accounts.framework */; };
 		EF1674B71B4A596C00729D3C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674B61B4A596C00729D3C /* Social.framework */; };
 		EF1674BD1B4A5A8500729D3C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BC1B4A5A8500729D3C /* Parse.framework */; };
-		EF1674BF1B4A5A8C00729D3C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1674BE1B4A5A8C00729D3C /* Bolts.framework */; };
+		EF94CBAA1B6A5073003187DE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF94CBA91B6A5073003187DE /* Bolts.framework */; };
 		EF9555121B50F9580014880F /* Settings-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9555111B50F9580014880F /* Settings-icon.png */; };
 		EF9555141B50FADD0014880F /* Name-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9555131B50FADD0014880F /* Name-icon.png */; };
 		EF9555161B50FAF70014880F /* Nearby-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9555151B50FAF70014880F /* Nearby-icon.png */; };
@@ -133,7 +132,7 @@
 		EF1674B41B4A596500729D3C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		EF1674B61B4A596C00729D3C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EF1674BC1B4A5A8500729D3C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		EF1674BE1B4A5A8C00729D3C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		EF94CBA91B6A5073003187DE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		EF9555111B50F9580014880F /* Settings-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings-icon.png"; sourceTree = "<group>"; };
 		EF9555131B50FADD0014880F /* Name-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Name-icon.png"; sourceTree = "<group>"; };
 		EF9555151B50FAF70014880F /* Nearby-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nearby-icon.png"; sourceTree = "<group>"; };
@@ -157,7 +156,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDBD78921B4A9CAC00CEA73D /* Bolts.framework in Frameworks */,
 				DDBD78911B4A9C9200CEA73D /* Parse.framework in Frameworks */,
 				EF1674B71B4A596C00729D3C /* Social.framework in Frameworks */,
 				EF1674B51B4A596500729D3C /* Accounts.framework in Frameworks */,
@@ -173,6 +171,7 @@
 				EF1674A31B4A590900729D3C /* CFNetwork.framework in Frameworks */,
 				EF1674A11B4A590000729D3C /* AudioToolbox.framework in Frameworks */,
 				8F8BEE731B2C46B800E4F71E /* MapKit.framework in Frameworks */,
+				EF94CBAA1B6A5073003187DE /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +187,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF1674BD1B4A5A8500729D3C /* Parse.framework in Frameworks */,
-				EF1674BF1B4A5A8C00729D3C /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +196,7 @@
 		8F7525701B1D753300C9FD37 = {
 			isa = PBXGroup;
 			children = (
-				EF1674BE1B4A5A8C00729D3C /* Bolts.framework */,
+				EF94CBA91B6A5073003187DE /* Bolts.framework */,
 				EF1674BC1B4A5A8500729D3C /* Parse.framework */,
 				EF1674B61B4A596C00729D3C /* Social.framework */,
 				EF1674B41B4A596500729D3C /* Accounts.framework */,

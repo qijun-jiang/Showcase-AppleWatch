@@ -74,13 +74,13 @@
   }
   
   /*
-   * For Retrieving Data
+   * For Retrieving Data From Logic Solutions Server
    */
   if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"customerList"]) {
     
     // --------------------URL Request--------------------------//
     
-    
+    // Set URL for retrieving data
     NSString *post = [[NSString alloc] initWithFormat:@"{\"root\": {\"parameters\": {\"clientId\"=\"logic091312\", \"methodName\":\"queryCustomerWithAddress\"}}}"];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
@@ -98,6 +98,7 @@
       NSDictionary * replyInfo;
       
       if (!error) {
+        // Parse Json data and store them in NSArray named "customers"
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         NSArray *customers = [[NSArray alloc] initWithArray:[[dictionary objectForKey:@"content"] objectForKey:@"customer"]];
         
@@ -106,13 +107,14 @@
         lm.distanceFilter = kCLHeadingFilterNone;
         [lm requestWhenInUseAuthorization];
         [lm startUpdatingLocation];
-        //      CLLocation *currentLocation = [lm location];
+        CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location on simulator
-        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
+        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
         
         NSMutableArray *myItems = [[NSMutableArray alloc] init];
         
+        //Deal with every customers' data
         for (int i = 0; i < customers.count; i++) {
           NSDictionary *theObject = [customers objectAtIndex:i];
           
@@ -133,25 +135,26 @@
             }
           }
           
+          // Handle the null values of a customer gotten from Logic Solutions' Server
           NSMutableString* customerName;
           NSMutableString* address;
           NSMutableString* state;
           NSMutableString* latitude;
           NSMutableString* longitude;
           if (theObject[@"customerName"] == nil || [theObject[@"customerName"] isEqual:[NSNull null]]){
-            customerName = [NSMutableString stringWithString: @"unknown"];
-          } else {
+            customerName = [NSMutableString stringWithString: @"Unknown customer name"];
+          }else {
             if ([theObject[@"customerName"] isEqualToString:@""]) {
-              customerName = [NSMutableString stringWithString: @"unknown"];
+              customerName = [NSMutableString stringWithString: @"Unknown customer name"];
             } else {
               customerName = [NSMutableString stringWithString: theObject[@"customerName"]];
             }
           }
           if (theObject[@"address"] == nil || [theObject[@"address"] isEqual:[NSNull null]]){
-            address = [NSMutableString stringWithString: @"unknown"];
+            address = [NSMutableString stringWithString: @"Unknown address"];
           } else {
             if ([theObject[@"address"] isEqualToString:@""]) {
-              address = [NSMutableString stringWithString: @"unknown"];
+              address = [NSMutableString stringWithString: @"Unknown address"];
             } else {
               address = [NSMutableString stringWithString: theObject[@"address"]];
             }
@@ -166,17 +169,6 @@
             }
           }
           
-          if (theObject[@"latitude"] == nil || [theObject[@"latitude"] isEqual:[NSNull null]]){
-            latitude = [NSMutableString stringWithString: @"0"];
-          } else {
-            latitude = [NSMutableString stringWithString: theObject[@"latitude"]];
-          }
-          if (theObject[@"longitude"] == nil || [theObject[@"longitude"] isEqual:[NSNull null]]){
-            longitude = [NSMutableString stringWithString: @"0"];
-          } else {
-            longitude = [NSMutableString stringWithString: theObject[@"longitude"]];
-          }
-          
           NSDictionary *theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
                                        customerName, @"name",
                                        address, @"address",
@@ -188,7 +180,7 @@
           [myItems addObject:theCustomer];
         }
         
-        // Sort By different categories
+        // Define differnt sort types
         NSString * sortByStr;
         if ([[userInfo objectForKey:@"sortType"] isEqual:@"byName"]) {
           sortByStr = @"name";
@@ -220,12 +212,12 @@
                 return NO;
               }
             }
-            float first =  [str_a floatValue];
+            float first  = [str_a floatValue];
             float second = [str_b floatValue];
             return (first > second);
           }
           else {
-            NSString *first = [(NSDictionary*)a valueForKeyPath:sortByStr];
+            NSString *first  = [(NSDictionary*)a valueForKeyPath:sortByStr];
             NSString *second = [(NSDictionary*)b valueForKeyPath:sortByStr];
             return [first compare:second];
           }
@@ -257,7 +249,6 @@
           
           for (int i = 0; i < sortCount; i++) {
             id myArrayElement = [sortedArray objectAtIndex:i];
-            
             NSString * firstLetter; // All swtiched to upper case
             if ([[userInfo objectForKey:@"sortType"] isEqual:@"byName"]) {
               // If starts with letter.
@@ -308,15 +299,14 @@
       
       if (!error) {
               CLLocationManager *lm = [[CLLocationManager alloc] init];
-              lm.delegate = self;
               lm.desiredAccuracy = kCLLocationAccuracyBest;
               lm.distanceFilter = kCLHeadingFilterNone;
               [lm requestWhenInUseAuthorization];
               [lm startUpdatingLocation];
-              //CLLocation *currentLocation = [lm location];
+              CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location
-        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.584939" floatValue]];
+        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.584939" floatValue]];
         
         CLLocation * Location;
         double distanceMeters;

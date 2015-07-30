@@ -15,18 +15,21 @@
 @implementation PersonInterfaceController
 
 - (void)awakeWithContext:(id)context {
-    NSDictionary *theCustomer = [[NSDictionary alloc] initWithDictionary:context];
-    [super awakeWithContext:context];
-    [_Name setText:[NSString stringWithFormat:@"%@", [theCustomer objectForKey:@"name"]]];
-    [_Address setText:[NSString stringWithFormat:@"%@", [theCustomer objectForKey: @"address"]]];
-    [_Distance setText:[NSString stringWithFormat:@"%@ away", [theCustomer objectForKey: @"distance"]]];
-    // Configure interface objects here.
+  
+  // Get the data from last interface through segue
+  NSDictionary *theCustomer = [[NSDictionary alloc] initWithDictionary:context];
+  [super awakeWithContext:context];
+  [_Name setText:[NSString stringWithFormat:@"%@", [theCustomer objectForKey:@"name"]]];
+  [_Address setText:[NSString stringWithFormat:@"%@", [theCustomer objectForKey: @"address"]]];
+  [_Distance setText:[NSString stringWithFormat:@"%@ away", [theCustomer objectForKey: @"distance"]]];
  
+  // Hide the map when there is no latitude and longitude information
   if ([[theCustomer objectForKey: @"distance"] isEqual:@"unknown distance"]) {
     [self.MapView setHidden:YES];
     return;
   }
   
+  // Show the location on map for navigation
   MKCoordinateSpan coordinateSpan = MKCoordinateSpanMake(0.05, 0.05);
   NSMutableArray * locations = [[NSMutableArray alloc] init];
   CLLocationCoordinate2D Location;

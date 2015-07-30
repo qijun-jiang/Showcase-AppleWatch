@@ -15,79 +15,12 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1OR-ms-CYF">
-                                <rect key="frame" x="139" y="116" width="296" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="hello" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxL-BY-WVd">
-                                <rect key="frame" x="187" y="-2" width="37" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="1OR-ms-CYF" secondAttribute="centerY" constant="153" id="Bct-J6-wTE"/>
-                            <constraint firstAttribute="centerY" secondItem="kxL-BY-WVd" secondAttribute="centerY" constant="275.5" id="a0T-FJ-MAl"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="myLabel" destination="kxL-BY-WVd" id="VlJ-bj-rHa"/>
-                        <outlet property="myTextField" destination="1OR-ms-CYF" id="HGT-MR-s6u"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-123.73333333333333" y="260.33333333333331"/>
-        </scene>
-        <!--Map View Controller-->
-        <scene sceneID="43I-Vo-ldK">
-            <objects>
-                <viewController id="Si7-Aj-Nvq" customClass="MapViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mVM-ac-WnO"/>
-                        <viewControllerLayoutGuide type="bottom" id="KUI-zr-5Uq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9DR-iI-BMU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rle-rR-cUk">
-                                <rect key="frame" x="-140" y="-74" width="600" height="600"/>
-                            </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jj3-IP-0B4">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" id="jXT-DW-rHb">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="5og-YV-lOn">
-                                            <rect key="frame" x="16" y="7" width="284" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <segments>
-                                                <segment title="standard"/>
-                                                <segment title="satellite"/>
-                                                <segment title="hybrid"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="setMap:" destination="Si7-Aj-Nvq" eventType="valueChanged" id="Z4u-Kc-b4u"/>
-                                            </connections>
-                                        </segmentedControl>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="aDd-Dc-BDl"/>
-                    <connections>
-                        <outlet property="mymapview" destination="Rle-rR-cUk" id="zc5-2g-c9X"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="naS-gK-su7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="237" y="266"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

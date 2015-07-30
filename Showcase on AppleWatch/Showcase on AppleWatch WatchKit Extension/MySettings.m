@@ -10,9 +10,9 @@
 
 @implementation MySettings
 
-//@synthesize unitIsMile;
 int unitIsMile;
 
+// A singleton used to record the settings
 + (id) sharedSetting {
   static MySettings *sharedMySettings = nil;
   static dispatch_once_t onceToken;

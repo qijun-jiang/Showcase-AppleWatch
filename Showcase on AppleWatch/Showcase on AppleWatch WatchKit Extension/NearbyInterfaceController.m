@@ -25,7 +25,8 @@
     if (error) {
       NSLog(@"---------------ERROR:%@", error);
     }
-    else {      
+    else {
+      // different start information for different number of customers
       if (replyInfo.count == 0) {
         [_nearestDescription setText:@"Sorry! We found no user for you."];
         [_fullListButton setHidden:YES];
@@ -38,10 +39,11 @@
         }
         else {
           NSDictionary *anotherCustomer = [replyInfo valueForKeyPath:[@(replyInfo.count - 1) stringValue]];
-          [_nearestDescription setText:[NSString stringWithFormat:@"The nearest %ld customers are from %@ to %@ away", replyInfo.count, [theCustomer objectForKey:@"distance"], [anotherCustomer objectForKey:@"distance"]]];
+          [_nearestDescription setText:[NSString stringWithFormat:@"The nearest %ld customers are from %@ to %@ away", (unsigned long)replyInfo.count, [theCustomer objectForKey:@"distance"], [anotherCustomer objectForKey:@"distance"]]];
         }
       }
       
+      // Put customers' information on table and map
       _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
       [self.nearestFourTable setNumberOfRows:replyInfo.count withRowType:@"CustomerRow"];
       
@@ -94,6 +96,7 @@
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
+  // send the customer information to PersonInterfaceController
   NSDictionary * theCustomer = [_customerList valueForKeyPath:[@(rowIndex) stringValue]];
   [self pushControllerWithName:@"PersonController" context:theCustomer];
 }

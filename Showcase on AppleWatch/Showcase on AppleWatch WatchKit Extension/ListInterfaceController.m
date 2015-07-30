@@ -34,7 +34,7 @@
       else {
         _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
        
-        // Sort this array with compare, Shiny Blocks!!!!
+        // Sort the first character
         NSMutableArray *myItems = [[NSMutableArray alloc] initWithArray:[replyInfo allKeys] copyItems:YES];
         NSArray *sortedArray;
         sortedArray = [myItems sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
@@ -43,6 +43,7 @@
           return [first compare:second];
         }];
         
+        // Set rows of the first character on table
         [self.characterTable setNumberOfRows:replyInfo.count withRowType:@"CharacterRow"];
         for (int i = 0; i < replyInfo.count; i++) {
           CustomerRow *theRow = [self.characterTable rowControllerAtIndex:i];
@@ -71,6 +72,11 @@
   CustomerRow *selectedRow = [table rowControllerAtIndex:rowIndex];
   NSString *selectedRowName = selectedRow.categoryName;
   NSInteger theIndex = rowIndex;
+  
+  // When a selected row is a character row, not a customer row
+  // If it is not selected last time, create a sub table under the character
+  // to show the customers with the same first character
+  // If it is selected before, collapse its sub table
   if (selectedRow.isCustomer == false) {
     NSIndexSet *indexes;
     if (_selectedRowIndex != -1) {

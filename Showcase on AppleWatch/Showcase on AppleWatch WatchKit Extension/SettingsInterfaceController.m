@@ -31,6 +31,8 @@
       [self miButtonClicked];
     }
 }
+
+// Change the distance unit to km
 - (IBAction)kmButtonClicked {
   [_kmButton setBackgroundColor: _selectedColor];
   [_miButton setBackgroundColor: _originColor];
@@ -45,6 +47,8 @@
     }];
   }
 }
+
+// Change the distance unit to mi
 - (IBAction)miButtonClicked {
   [_kmButton setBackgroundColor: _originColor];
   [_miButton setBackgroundColor: _selectedColor];
@@ -59,13 +63,23 @@
     }];
   }
 }
+
+// Change the distance measurement to length
+// enable the km and mi button
 - (IBAction)distanceButtonClicked {
   [_distanceButton setBackgroundColor: _selectedColor];
   [_timeButton setBackgroundColor: _originColor];
+  [_kmButton setEnabled:YES];
+  [_miButton setEnabled:YES];
 }
+
+// Change the distance measurement to time
+// disable the km and mi button
 - (IBAction)timeButtonClicked {
   [_distanceButton setBackgroundColor: _originColor];
   [_timeButton setBackgroundColor: _selectedColor];
+  [_kmButton setEnabled:NO];
+  [_miButton setEnabled:NO];
 }
 
 - (void)willActivate {
@@ -76,7 +90,6 @@
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
-  NSLog(@"deactivating.....");
 }
 
 @end
