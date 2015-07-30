@@ -10,7 +10,7 @@
             <objects>
                 <controller identifier="NearbyController" title="Nearby" id="hsk-HL-36P" customClass="NearbyInterfaceController">
                     <items>
-                        <group height="1" alignment="left" layout="vertical" id="3kV-76-gUy">
+                        <group alignment="left" layout="vertical" id="3kV-76-gUy">
                             <items>
                                 <label width="1" alignment="left" text="Loading..." textAlignment="left" numberOfLines="0" minimumScaleFactor="0.80000000000000004" id="0dO-YE-QwI">
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

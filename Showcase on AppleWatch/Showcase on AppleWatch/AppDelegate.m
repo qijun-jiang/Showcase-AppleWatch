@@ -103,14 +103,16 @@
         NSArray *customers = [[NSArray alloc] initWithArray:[[dictionary objectForKey:@"content"] objectForKey:@"customer"]];
         
         CLLocationManager *lm = [[CLLocationManager alloc] init];
+        lm.delegate = self;
         lm.desiredAccuracy = kCLLocationAccuracyBest;
         lm.distanceFilter = kCLHeadingFilterNone;
         [lm requestWhenInUseAuthorization];
+        [lm requestAlwaysAuthorization];
         [lm startUpdatingLocation];
         CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location on simulator
-        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
+        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.203339" floatValue] longitude:[@"121.600303" floatValue]];
         
         NSMutableArray *myItems = [[NSMutableArray alloc] init];
         
@@ -120,9 +122,9 @@
           
           // get distance, tons of thanks to "<null>" on latitute and longitude!
           double distanceMeters;
-          NSString * distanceStr;
+          NSString * distanceStr = @"unknown distance";
           
-          if (theObject[@"latitude"] == nil || [theObject[@"latitude"] isEqual:[NSNull null]]) {
+          if (theObject[@"latitude"] == nil || [theObject[@"latitude"] isEqual:[NSNull null]] || theObject[@"longitude"] == nil || [theObject[@"longitude"] isEqual:[NSNull null]]) {
             distanceStr = @"unknown distance";
           } else {
             CLLocation *Location = [[CLLocation alloc] initWithLatitude:[theObject[@"latitude"] floatValue] longitude:[theObject[@"longitude"] floatValue]];
@@ -167,6 +169,16 @@
             } else {
               state = [NSMutableString stringWithString: theObject[@"state"]];
             }
+          }
+          if (theObject[@"latitude"] == nil || [theObject[@"latitude"] isEqual:[NSNull null]]){
+            latitude = [NSMutableString stringWithString:@"0"];
+          } else {
+            latitude = [NSMutableString stringWithString: theObject[@"latitude"]];
+          }
+          if (theObject [@"longitude"] == nil || [theObject[@"longitude"] isEqual:[NSNull null]]){
+            longitude = [NSMutableString stringWithString:@"0"];
+          } else {
+            longitude = [NSMutableString stringWithString: theObject[@"longitude"]];
           }
           
           NSDictionary *theCustomer = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -236,6 +248,11 @@
             id myArrayElement = [sortedArray objectAtIndex:i];
             [tempDictionary setObject:myArrayElement forKey:[@(i) stringValue]];
           }
+          NSDictionary *theUser = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                    @"User", @"name",
+                                    [[NSString alloc] initWithFormat:@"%f", currentLocation.coordinate.latitude], @"latitude",
+                                    [[NSString alloc] initWithFormat:@"%f", currentLocation.coordinate.longitude], @"longitude",nil];
+          [tempDictionary setObject:theUser forKey:[@(sortCount) stringValue]];
         }
         else if([[userInfo objectForKey:@"sortType"] isEqual:@"nearbyAll"]) {
           sortCount = (int)[sortedArray count];
@@ -279,8 +296,9 @@
         NSLog(@"Error: %@ %@", error, [error userInfo]);
       }
       
-      replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
-      reply(replyInfo);
+      reply(tempDictionary);
+      //replyInfo = [NSDictionary dictionaryWithDictionary:tempDictionary];
+      //reply(replyInfo);
     }] resume];
     
     //---------------------URL Request end-------------------//

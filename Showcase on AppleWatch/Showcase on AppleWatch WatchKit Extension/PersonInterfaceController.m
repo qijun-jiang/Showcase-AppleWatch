@@ -30,18 +30,25 @@
   }
   
   // Show the location on map for navigation
-  MKCoordinateSpan coordinateSpan = MKCoordinateSpanMake(0.05, 0.05);
-  NSMutableArray * locations = [[NSMutableArray alloc] init];
-  CLLocationCoordinate2D Location;
+  MKCoordinateSpan coordinateSpan;
+  CLLocationCoordinate2D LocationCustomer;
+  CLLocationCoordinate2D LocationUser;
   MKPointAnnotation * point;
     
-  point= [[MKPointAnnotation alloc] init];
-  Location.latitude=[[theCustomer objectForKey:@"latitude"]floatValue];
-  Location.longitude=[[theCustomer objectForKey:@"longitude"] floatValue];
-  point.coordinate = Location;
-  [locations addObject:point];
-  [self.MapView addAnnotation:Location withPinColor: WKInterfaceMapPinColorRed];
-  [self.MapView setRegion:(MKCoordinateRegionMake(Location, coordinateSpan))];
+  point = [[MKPointAnnotation alloc] init];
+  // Set customer location on map
+  LocationCustomer.latitude=[[theCustomer objectForKey:@"latitude"]floatValue];
+  LocationCustomer.longitude=[[theCustomer objectForKey:@"longitude"] floatValue];
+  point.coordinate = LocationCustomer;
+  [self.MapView addAnnotation:LocationCustomer withPinColor: WKInterfaceMapPinColorRed];
+  // Set user location on map
+  LocationUser.latitude=[[theCustomer objectForKey:@"userLatitude"]floatValue];
+  LocationUser.longitude=[[theCustomer objectForKey:@"userLongitude"] floatValue];
+  point.coordinate = LocationUser;
+  [self.MapView addAnnotation:LocationUser withPinColor: WKInterfaceMapPinColorGreen];
+  
+  coordinateSpan = MKCoordinateSpanMake(fabs(LocationUser.latitude - LocationCustomer.latitude) * 2.5, fabs(LocationUser.longitude - LocationCustomer.longitude) * 2.5);
+  [self.MapView setRegion:(MKCoordinateRegionMake(LocationCustomer, coordinateSpan))];
 }
 - (IBAction)nearbySegue {
   [self pushControllerWithName:@"NearbyController" context:nil];
