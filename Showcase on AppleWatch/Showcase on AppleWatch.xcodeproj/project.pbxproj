@@ -15,7 +15,6 @@
 		8F75258A1B1D753400C9FD37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7525891B1D753400C9FD37 /* Images.xcassets */; };
 		8F75258D1B1D753400C9FD37 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F75258B1B1D753400C9FD37 /* LaunchScreen.xib */; };
 		8F7525991B1D753400C9FD37 /* Showcase_on_AppleWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7525981B1D753400C9FD37 /* Showcase_on_AppleWatchTests.m */; };
-		8F7525AD1B1D755600C9FD37 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7525AC1B1D755600C9FD37 /* InterfaceController.m */; };
 		8F7525B01B1D755600C9FD37 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7525AF1B1D755600C9FD37 /* NotificationController.m */; };
 		8F7525B21B1D755600C9FD37 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7525B11B1D755600C9FD37 /* Images.xcassets */; };
 		8F7525B61B1D755600C9FD37 /* Showcase on AppleWatch WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 8F7525B51B1D755600C9FD37 /* Showcase on AppleWatch WatchKit App.app */; };
@@ -109,8 +108,6 @@
 		8F7525A61B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Showcase on AppleWatch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F7525A91B1D755600C9FD37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F7525AA1B1D755600C9FD37 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		8F7525AB1B1D755600C9FD37 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
-		8F7525AC1B1D755600C9FD37 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		8F7525AE1B1D755600C9FD37 /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
 		8F7525AF1B1D755600C9FD37 /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
 		8F7525B11B1D755600C9FD37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -280,8 +277,6 @@
 		8F7525A71B1D755600C9FD37 /* Showcase on AppleWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				8F7525AB1B1D755600C9FD37 /* InterfaceController.h */,
-				8F7525AC1B1D755600C9FD37 /* InterfaceController.m */,
 				8F7525AE1B1D755600C9FD37 /* NotificationController.h */,
 				8F7525AF1B1D755600C9FD37 /* NotificationController.m */,
 				8F7525B11B1D755600C9FD37 /* Images.xcassets */,
@@ -298,6 +293,10 @@
 				EFDF1A8C1B51316900944CB8 /* MenuInterfaceController.m */,
 				EFFA93151B4CFA8600EBAE06 /* PersonInterfaceController.h */,
 				EFFA93161B4CFA8600EBAE06 /* PersonInterfaceController.m */,
+				EF9A45D81B4EBED5005C12A3 /* NearbyInterfaceController.h */,
+				EF9A45D91B4EBED5005C12A3 /* NearbyInterfaceController.m */,
+				EFFDEDBD1B4ECFF800523474 /* ListInterfaceController.h */,
+				EFFDEDBE1B4ECFF800523474 /* ListInterfaceController.m */,
 			);
 			path = "Showcase on AppleWatch WatchKit Extension";
 			sourceTree = "<group>";
@@ -315,14 +314,10 @@
 			isa = PBXGroup;
 			children = (
 				EFFA93101B4CF0C700EBAE06 /* Interface.storyboard */,
-				EF9A45D91B4EBED5005C12A3 /* NearbyInterfaceController.m */,
 				EF95551F1B50FF7D0014880F /* icon-city.png */,
 				EF9555151B50FAF70014880F /* Nearby-icon.png */,
 				EF9555131B50FADD0014880F /* Name-icon.png */,
 				EF9555111B50F9580014880F /* Settings-icon.png */,
-				EF9A45D81B4EBED5005C12A3 /* NearbyInterfaceController.h */,
-				EFFDEDBD1B4ECFF800523474 /* ListInterfaceController.h */,
-				EFFDEDBE1B4ECFF800523474 /* ListInterfaceController.m */,
 				8F7525BF1B1D755600C9FD37 /* Images.xcassets */,
 				8F7525BA1B1D755600C9FD37 /* Supporting Files */,
 			);
@@ -538,7 +533,6 @@
 				EFFA93171B4CFA8600EBAE06 /* PersonInterfaceController.m in Sources */,
 				EFDF1A8D1B51316900944CB8 /* MenuInterfaceController.m in Sources */,
 				EF9A45DA1B4EBED5005C12A3 /* NearbyInterfaceController.m in Sources */,
-				8F7525AD1B1D755600C9FD37 /* InterfaceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

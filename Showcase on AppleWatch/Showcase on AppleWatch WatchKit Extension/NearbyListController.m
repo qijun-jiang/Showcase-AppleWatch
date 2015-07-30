@@ -29,7 +29,6 @@
         NSLog(@"---------------ERROR:%@", error);
       }
       else {
-        NSLog(@"------------RIGHT!");
         _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
         [self.customerTable setNumberOfRows:replyInfo.count withRowType:@"CustomerRow"];
         for (int i = 0; i < self.customerTable.numberOfRows; i++) {

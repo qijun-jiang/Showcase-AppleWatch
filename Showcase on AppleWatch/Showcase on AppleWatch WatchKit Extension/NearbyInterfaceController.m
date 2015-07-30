@@ -25,9 +25,7 @@
     if (error) {
       NSLog(@"---------------ERROR:%@", error);
     }
-    else {
-      NSLog(@"------------RIGHT!");
-      
+    else {      
       if (replyInfo.count == 0) {
         [_nearestDescription setText:@"Sorry! We found no user for you."];
         [_fullListButton setHidden:YES];
@@ -61,7 +59,12 @@
         
         [theRow.Name setText:[theCustomer objectForKey:@"name"]];
         [theRow.Distance setText:[[theCustomer objectForKey:@"distance"] stringByAppendingString:@"》"]];
-        NSLog(@"name = %@, distance = %@", [theCustomer objectForKey:@"name"], [theCustomer objectForKey:@"distance"]);
+        
+        if ([[theCustomer objectForKey:@"distance"] isEqual:@"unknown distance"])
+        {
+          continue;
+        }
+        
         [lat addObject:[theCustomer objectForKey:@"latitude"]];
         [lon addObject:[theCustomer objectForKey:@"longitude"]];
         [name addObject:[theCustomer objectForKey:@"name"]];

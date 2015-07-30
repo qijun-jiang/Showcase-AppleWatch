@@ -42,9 +42,6 @@
       if (error) {
         NSLog(@"---------------ERROR:%@", error);
       }
-      else {
-        NSLog(@"unit = %@", [replyInfo objectForKey:@"unit"]);
-      }
     }];
   }
 }
@@ -58,9 +55,6 @@
     [WKInterfaceController openParentApplication:@{@"setUnitIsMile": @"1"} reply:^(NSDictionary *replyInfo,   NSError *error) {
       if (error) {
         NSLog(@"---------------ERROR:%@", error);
-      }
-      else {
-        NSLog(@"unit = %@", [replyInfo objectForKey:@"unit"]);
       }
     }];
   }

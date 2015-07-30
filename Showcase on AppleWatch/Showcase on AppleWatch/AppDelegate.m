@@ -64,20 +64,23 @@
 
 - (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *replyInfo))reply {
 
+  /* 
+   * For Changing Settings
+   */
   if ([userInfo objectForKey:@"setUnitIsMile"] != nil) {
     _unitIsMile = [[userInfo objectForKey:@"setUnitIsMile"] intValue];
     NSDictionary *replyInfo = nil;
-    //NSDictionary *replyInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-    //                                         [NSString stringWithFormat:@"aaaaa=%ld",_unitIsMile], @"unit", nil];
     reply(replyInfo);
   }
   
   /*
-   * For NearbyListController
+   * For Retrieving Data
    */
   if ([[userInfo objectForKey:@"getCustomers"] isEqual: @"customerList"]) {
     
     // --------------------URL Request--------------------------//
+    
+    
     NSString *post = [[NSString alloc] initWithFormat:@"{\"root\": {\"parameters\": {\"clientId\"=\"logic091312\", \"methodName\":\"queryCustomerWithAddress\"}}}"];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
@@ -95,51 +98,31 @@
       NSDictionary * replyInfo;
       
       if (!error) {
-        //NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         NSArray *customers = [[NSArray alloc] initWithArray:[[dictionary objectForKey:@"content"] objectForKey:@"customer"]];
         
-              CLLocationManager *lm = [[CLLocationManager alloc] init];
-        //      lm.delegate = self;
-              lm.desiredAccuracy = kCLLocationAccuracyBest;
-              lm.distanceFilter = kCLHeadingFilterNone;
-              [lm requestWhenInUseAuthorization];
-              [lm startUpdatingLocation];
-              CLLocation *currentLocation = [lm location];
+        CLLocationManager *lm = [[CLLocationManager alloc] init];
+        lm.desiredAccuracy = kCLLocationAccuracyBest;
+        lm.distanceFilter = kCLHeadingFilterNone;
+        [lm requestWhenInUseAuthorization];
+        [lm startUpdatingLocation];
+        //      CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location on simulator
-        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
-        
-        
+        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
         
         NSMutableArray *myItems = [[NSMutableArray alloc] init];
         
-        
         for (int i = 0; i < customers.count; i++) {
           NSDictionary *theObject = [customers objectAtIndex:i];
-          //        NSLog(@"%@", theObject);
           
           // get distance, tons of thanks to "<null>" on latitute and longitude!
           double distanceMeters;
           NSString * distanceStr;
           
-          //        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-          //        f.numberStyle = NSNumberFormatterDecimalStyle;
-          //        bool valid_latitude = [f numberFromString:theObject[@"latitude"]] != nil;
-          //        bool valid_longitude = [f numberFromString:theObject[@"longitude"]] != nil;
-          NSLog(@"%@", theObject[@"latitude"]);
-          
-          
-          //        if ([theObject[@"latitude"] isEqualToString:@"<null>"] ||
-          //            [theObject[@"longitude"] isEqualToString:@"<null>"]) {
           if (theObject[@"latitude"] == nil || [theObject[@"latitude"] isEqual:[NSNull null]]) {
-            if (_unitIsMile == 0) {
-              distanceStr = @"9999 km";
-            } else {
-              distanceStr = @"9999 mi";
-            }
+            distanceStr = @"unknown distance";
           } else {
-            
             CLLocation *Location = [[CLLocation alloc] initWithLatitude:[theObject[@"latitude"] floatValue] longitude:[theObject[@"longitude"] floatValue]];
             distanceMeters = [currentLocation distanceFromLocation:Location];
             if (_unitIsMile == 0) {
@@ -202,10 +185,6 @@
                                        longitude, @"longitude",
                                        distanceStr, @"distance", nil];
           
-          
-            
-          
-          NSLog(@"%@", theCustomer);
           [myItems addObject:theCustomer];
         }
         
@@ -227,9 +206,22 @@
         // Sort this array with compare, Shiny Blocks!!!!
         NSArray *sortedArray;
         sortedArray = [myItems sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+          NSString *str_a = [(NSDictionary*)a valueForKeyPath:sortByStr];
+          NSString *str_b = [(NSDictionary*)b valueForKeyPath:sortByStr];
           if ([sortByStr isEqual:@"distance"]) {
-            float first =  [[(NSDictionary*)a valueForKeyPath:sortByStr] floatValue];
-            float second = [[(NSDictionary*)b valueForKeyPath:sortByStr] floatValue];
+            if ([str_a isEqual:@"unknown distance"] || [str_b isEqual:@"unknown distance"]) {
+              if ([str_a isEqual:@"unknown distance"] && [str_b isEqual:@"unknown distance"]) {
+                return [[(NSDictionary*)a valueForKeyPath:@"name"] compare:[(NSDictionary*)b valueForKeyPath:@"name"]];
+              }
+              if ([str_a isEqual:@"unknown distance"]) {
+                return YES;
+              }
+              else {
+                return NO;
+              }
+            }
+            float first =  [str_a floatValue];
+            float second = [str_b floatValue];
             return (first > second);
           }
           else {

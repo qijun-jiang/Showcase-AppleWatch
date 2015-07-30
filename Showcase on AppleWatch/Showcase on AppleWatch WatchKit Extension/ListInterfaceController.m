@@ -32,7 +32,6 @@
         NSLog(@"---------------ERROR:%@", error);
       }
       else {
-        NSLog(@"------------RIGHT!");
         _customerList = [[NSDictionary alloc] initWithDictionary:replyInfo copyItems:YES];
        
         // Sort this array with compare, Shiny Blocks!!!!
@@ -73,7 +72,6 @@
   NSString *selectedRowName = selectedRow.categoryName;
   NSInteger theIndex = rowIndex;
   if (selectedRow.isCustomer == false) {
-    NSLog(@"------notCustomer: theIndex = %ld, _selectedRowIndex = %d, min = %ld, length = %ld", (long)rowIndex, _selectedRowIndex, (long)_minIndex, (long)_listLength);
     NSIndexSet *indexes;
     if (_selectedRowIndex != -1) {
       indexes = [[NSIndexSet alloc]initWithIndexesInRange: NSMakeRange(_minIndex, _listLength)];
@@ -105,7 +103,6 @@
     }
   }
   else {
-    NSLog(@"-------Customer");
     NSIndexSet *indexes = [[NSIndexSet alloc]initWithIndexesInRange: NSMakeRange(_minIndex, _listLength)];
     [self.characterTable removeRowsAtIndexes:indexes];
     NSDictionary * theCustomer = [[_customerList valueForKey:selectedRow.categoryName] objectAtIndex:selectedRow.categoryIndex];

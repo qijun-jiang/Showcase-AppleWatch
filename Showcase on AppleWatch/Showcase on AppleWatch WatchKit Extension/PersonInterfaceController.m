@@ -21,6 +21,11 @@
     [_Address setText:[NSString stringWithFormat:@"%@", [theCustomer objectForKey: @"address"]]];
     [_Distance setText:[NSString stringWithFormat:@"%@ away", [theCustomer objectForKey: @"distance"]]];
     // Configure interface objects here.
+ 
+  if ([[theCustomer objectForKey: @"distance"] isEqual:@"unknown distance"]) {
+    [self.MapView setHidden:YES];
+    return;
+  }
   
   MKCoordinateSpan coordinateSpan = MKCoordinateSpanMake(0.05, 0.05);
   NSMutableArray * locations = [[NSMutableArray alloc] init];
