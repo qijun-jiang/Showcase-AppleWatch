@@ -99,16 +99,16 @@
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         NSArray *customers = [[NSArray alloc] initWithArray:[[dictionary objectForKey:@"content"] objectForKey:@"customer"]];
         
-        //      CLLocationManager *lm = [[CLLocationManager alloc] init];
+              CLLocationManager *lm = [[CLLocationManager alloc] init];
         //      lm.delegate = self;
-        //      lm.desiredAccuracy = kCLLocationAccuracyBest;
-        //      lm.distanceFilter = kCLHeadingFilterNone;
-        //      [lm requestWhenInUseAuthorization];
-        //      [lm startUpdatingLocation];
-        //      CLLocation *currentLocation = [lm location];
+              lm.desiredAccuracy = kCLLocationAccuracyBest;
+              lm.distanceFilter = kCLHeadingFilterNone;
+              [lm requestWhenInUseAuthorization];
+              [lm startUpdatingLocation];
+              CLLocation *currentLocation = [lm location];
         
         // temportary solution, Since we can't get the current location on simulator
-        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
+        //CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[@"31.236329" floatValue] longitude:[@"121.484939" floatValue]];
         
         
         

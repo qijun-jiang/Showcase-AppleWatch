@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "Customer.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

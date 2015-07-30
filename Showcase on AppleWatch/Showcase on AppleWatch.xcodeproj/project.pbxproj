@@ -48,7 +48,6 @@
 		EFBA9A5B1B5189D500DC8476 /* MySettings.m in Sources */ = {isa = PBXBuildFile; fileRef = EFBA9A5A1B5189D500DC8476 /* MySettings.m */; };
 		EFDF1A8B1B511D1700944CB8 /* SettingsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDF1A8A1B511D1700944CB8 /* SettingsInterfaceController.m */; };
 		EFDF1A8D1B51316900944CB8 /* MenuInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDF1A8C1B51316900944CB8 /* MenuInterfaceController.m */; };
-		EFF18CAC1B4BFEB7007D6743 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFF18CAB1B4BFEB7007D6743 /* Customer.m */; };
 		EFFA93111B4CF0C700EBAE06 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFFA93101B4CF0C700EBAE06 /* Interface.storyboard */; };
 		EFFA93171B4CFA8600EBAE06 /* PersonInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFA93161B4CFA8600EBAE06 /* PersonInterfaceController.m */; };
 		EFFDEDBF1B4ECFF800523474 /* ListInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFDEDBE1B4ECFF800523474 /* ListInterfaceController.m */; };
@@ -149,8 +148,6 @@
 		EFDF1A891B511D1700944CB8 /* SettingsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsInterfaceController.h; sourceTree = "<group>"; };
 		EFDF1A8A1B511D1700944CB8 /* SettingsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsInterfaceController.m; sourceTree = "<group>"; };
 		EFDF1A8C1B51316900944CB8 /* MenuInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuInterfaceController.m; sourceTree = "<group>"; };
-		EFF18CAA1B4BFEB7007D6743 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
-		EFF18CAB1B4BFEB7007D6743 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		EFFA93101B4CF0C700EBAE06 /* Interface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		EFFA93151B4CFA8600EBAE06 /* PersonInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInterfaceController.h; sourceTree = "<group>"; };
 		EFFA93161B4CFA8600EBAE06 /* PersonInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInterfaceController.m; sourceTree = "<group>"; };
@@ -244,8 +241,6 @@
 			children = (
 				8F7525801B1D753400C9FD37 /* AppDelegate.h */,
 				8F7525811B1D753400C9FD37 /* AppDelegate.m */,
-				EFF18CAA1B4BFEB7007D6743 /* Customer.h */,
-				EFF18CAB1B4BFEB7007D6743 /* Customer.m */,
 				8F7525831B1D753400C9FD37 /* ViewController.h */,
 				8F7525841B1D753400C9FD37 /* ViewController.m */,
 				8F7525861B1D753400C9FD37 /* Main.storyboard */,
@@ -427,6 +422,9 @@
 					8F7525781B1D753300C9FD37 = {
 						CreatedOnToolsVersion = 6.3.1;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
 							};
@@ -516,7 +514,6 @@
 				8F7525851B1D753400C9FD37 /* ViewController.m in Sources */,
 				8F7525821B1D753400C9FD37 /* AppDelegate.m in Sources */,
 				8F75257F1B1D753400C9FD37 /* main.m in Sources */,
-				EFF18CAC1B4BFEB7007D6743 /* Customer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
